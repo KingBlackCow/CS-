@@ -1,47 +1,95 @@
 <template lang="">
-  <q-dialog>
-    <q-card>
-      <q-card-section>
-        <q-form
-          class="q-gutter-md form-wrap"
-          ref="updatepw_form"
-          @submit="onSubmit"
-          @reset="onReset"
-        >
-          <q-input
-            v-model="state.form.pass"
-            :rules="state.rules.pass"
-            type="password"
-            label="비밀번호 *"
-          />
-
-          <q-input
-            v-model="state.form.passcheck"
-            :rules="state.rules.passcheck"
-            type="password"
-            label="비밀번호 확인 *"
-          />
-          <div class="submit-btns">
-            <q-btn color="primary" type="submit" label="비밀번호변경" />
-            <q-btn
-              class="q-ml-sm"
-              flat
-              color="primary"
-              type="reset"
-              label="초기화"
-            />
+  <q-dialog class="bookstyle-dialog">
+    <div class="book">
+      <div class="left-card-top row justify-end">
+        <div class="left-card-top-left"></div>
+        <div class="left-card-top-right"></div>
+      </div>
+      <div class="left-card-back">
+        <div class="left-card">
+          <div class="updatepw-card-title">새 비밀번호 설정</div>
+          <div class="updatepw-card-info">
+            영문, 숫자, 특수문자를 포함한<br />
+            8자리 이상 비밀번호로 설정
           </div>
-        </q-form>
-      </q-card-section>
-    </q-card>
+        </div>
+      </div>
+      <div class="left-card-bottom-back row justify-end">
+        <div class="left-card-bottom row">
+          <div class="left-card-bottom-left"></div>
+          <div class="left-card-bottom-right"></div>
+        </div>
+      </div>
+    </div>
+    <div class="book">
+      <div class="right-card-top row">
+        <div class="right-card-top-left"></div>
+        <div class="right-card-top-right"></div>
+      </div>
+      <div class="right-card-back">
+        <div class="right-card column">
+          <q-btn
+            class="updatepw-card-close-btn self-end"
+            v-close-popup
+            flat
+            round
+            dense
+            icon="close"
+          />
+          <div class="updatepw-card-right-info">
+            <q-form ref="updatepw_form" @submit="onSubmit" @reset="onReset">
+              <q-input
+                dense
+                v-model="state.form.pass"
+                :rules="state.rules.pass"
+                type="password"
+                label="비밀번호 *"
+              />
+
+              <q-input
+                dense
+                v-model="state.form.passcheck"
+                :rules="state.rules.passcheck"
+                type="password"
+                label="비밀번호 확인 *"
+              />
+              <div>
+                <q-btn class="q-ml-sm" flat type="reset" label="초기화" />
+                <q-btn
+                  class="updatepw-card-btn"
+                  outline
+                  type="submit"
+                  label="비밀번호변경"
+                />
+              </div>
+            </q-form>
+          </div>
+        </div>
+      </div>
+      <div class="right-card-bottom-back row">
+        <div class="right-card-bottom row">
+          <div class="right-card-bottom-left"></div>
+          <div class="right-card-bottom-right"></div>
+        </div>
+      </div>
+    </div>
   </q-dialog>
 </template>
 <script>
+import "@/styles/bookdialog.scss";
+import "@/styles/updatepw.scss";
 import { ref, reactive } from "vue";
+import { useStore } from "vuex";
+import { useQuasar } from "quasar";
 export default {
   name: "login-updatepw",
+  props: {
+    email: String,
+  },
   setup(props, { emit }) {
     const updatepw_form = ref(null);
+    const store = useStore();
+    const quasar = useQuasar();
     const state = reactive({
       form: {
         pass: "",
@@ -77,11 +125,47 @@ export default {
     };
     /*ㅡㅡㅡㅡㅡ 버튼 ㅡㅡㅡㅡㅡ*/
     const onSubmit = () => {
-      emit("mvlogin");
+      updatepw_form.value.validate().then((success) => {
+        if (success) {
+          store
+            .dispatch("root/requestUserFixPw", {
+              email: props.email,
+              pass: state.form.pass,
+            })
+            .then(
+              () => {
+                fixpwSuccess();
+              },
+              (error) => {
+                console.log(error);
+              }
+            )
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      });
     };
     const onReset = () => {
       state.form.pass = null;
       state.form.passcheck = null;
+    };
+    /*ㅡㅡㅡㅡㅡ 다이얼로그 ㅡㅡㅡㅡㅡ*/
+    const fixpwSuccess = () => {
+      quasar
+        .dialog({
+          title: "새 비밀번호 설정",
+          message: "비밀번호가 변경되었습니다!",
+        })
+        .onOk(() => {
+          emit("mvlogin");
+        })
+        .onCancel(() => {
+          console.log("Cancel");
+        })
+        .onDismiss(() => {
+          console.log("I am triggered on both OK and Cancel");
+        });
     };
 
     return {

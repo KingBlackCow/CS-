@@ -37,24 +37,25 @@
             dense
             icon="close"
           />
-          <div class="items-end">
+          <q-form ref="email_form" @submit="emailAuthentication">
             <q-input
               class="findpw-card-email"
               dense
-              ref="email"
               v-model="state.email"
               :rules="state.rules.email"
               lazy-rules
               type="email"
               label="이메일"
             />
-            <q-btn
-              class="findpw-card-btn"
-              outline
-              label="인증요청"
-              @click="emailAuthentication"
-            ></q-btn>
-          </div>
+            <div>
+              <q-btn
+                class="findpw-card-btn"
+                outline
+                label="인증요청"
+                type="submit"
+              ></q-btn>
+            </div>
+          </q-form>
         </div>
       </div>
       <div class="right-card-bottom-back row">
@@ -69,14 +70,14 @@
 <script>
 import "@/styles/bookdialog.scss";
 import "@/styles/findpw.scss";
-import { ref, reactive } from "vue";
+import { reactive } from "vue";
 import { useStore } from "vuex";
 
 export default {
   name: "login-findpw",
   setup(props, { emit }) {
     const store = useStore();
-    const email = ref(null);
+    // const email_form = ref(null);
 
     const state = reactive({
       email: "",
@@ -94,29 +95,29 @@ export default {
     };
 
     const emailAuthentication = () => {
-      email.value.validate().then((success) => {
-        if (success) {
-          store
-            .dispatch("root/requestUserSendEmail", {
-              email: state.email,
-            })
-            .then(
-              () => {
-                requsetAuth();
-              },
-              (error) => {
-                console.log(error);
-              }
-            )
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-      });
+      store
+        .dispatch("root/requestUserSendEmail", {
+          email: state.email,
+        })
+        .then(
+          (response) => {
+            console.log(response.data);
+            requsetAuth(response.data);
+          },
+          (error) => {
+            alert("error:", error);
+          }
+        )
+        .catch((error) => {
+          console.log(error);
+        });
     };
-    const requsetAuth = () => {
+    const requsetAuth = (authNumber) => {
       console.log(state.email);
-      emit("openemailcheck", state.email);
+      emit("openemailcheck", {
+        email: state.email,
+        authNumber: authNumber.message,
+      });
     };
     return {
       state,

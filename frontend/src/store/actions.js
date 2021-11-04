@@ -71,11 +71,7 @@ export async function requsetCategoryList() {
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 문제 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 // 문제만들기
 export async function requsetProblemCreate({ state }, payload) {
-<<<<<<< Updated upstream
-  console.log(state, payload.userId);
-=======
   console.log("requsetProblemCreate", state, payload);
->>>>>>> Stashed changes
   const url = "/problem/make";
   const body = payload;
   console.log(body);
