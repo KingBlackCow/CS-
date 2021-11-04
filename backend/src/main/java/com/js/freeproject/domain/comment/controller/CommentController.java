@@ -13,7 +13,7 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin(origins = {"*"}, maxAge = 6000)
-@RequestMapping("/api/v1/comment")
+@RequestMapping("/comment")
 public class CommentController {
 
     private final CommentService commentService;
