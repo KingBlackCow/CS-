@@ -4,10 +4,7 @@ import com.js.freeproject.domain.category.application.CategoryService;
 import com.js.freeproject.domain.category.domain.Category;
 import com.js.freeproject.domain.model.CommonResponse;
 import com.js.freeproject.domain.problem.application.ProblemService;
-import com.js.freeproject.domain.problem.domain.AnswerResponse;
-import com.js.freeproject.domain.problem.domain.ProblemMakeRequest;
-import com.js.freeproject.domain.problem.domain.ProblemResponse;
-import com.js.freeproject.domain.problem.domain.ProblemStatus;
+import com.js.freeproject.domain.problem.domain.*;
 import io.swagger.annotations.ApiOperation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -70,7 +67,7 @@ public class ProblemController {
     @GetMapping("/wait")
     @ApiOperation(value = "승인대기상태 문제가지고오기")
     public ResponseEntity waitProblems(){
-        List<ProblemResponse> waitProblems = problemService.findByStatus(ProblemStatus.wait);
+        List<ProblemStatusResponse> waitProblems = problemService.findByStatus(ProblemStatus.wait);
         if(waitProblems.isEmpty()){
             throw new IllegalStateException("승인 대기중인 문제가 없습니다.");
         }

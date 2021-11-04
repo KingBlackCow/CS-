@@ -71,10 +71,10 @@ public class ProblemService {
         return size;
     }
 
-    public List<ProblemResponse> findByStatus(ProblemStatus problemStatus) {
+    public List<ProblemStatusResponse> findByStatus(ProblemStatus problemStatus) {
         List<Problem> problems = problemRepository.findByStatus(problemStatus);
-        List<ProblemResponse> problemResponses = problems.stream()
-                .map(ProblemResponse::new).collect(toList());
+        List<ProblemStatusResponse> problemResponses = problems.stream()
+                .map(ProblemStatusResponse::new).collect(toList());
         return problemResponses;
     }
 
