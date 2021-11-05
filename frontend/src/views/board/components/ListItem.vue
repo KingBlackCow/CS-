@@ -25,7 +25,6 @@ export default {
     item: { type: Object },
   },
   setup(props) {
-    console.log(props.item);
     const router = useRouter();
 
     const getBoardInfo = () => {

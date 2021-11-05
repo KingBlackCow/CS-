@@ -1,16 +1,20 @@
 <template>
   <div class="left-wrap">
     <div class="open-left-wrap">
-      <div class="board-nav">
+      <div class="board-nav" ref="scrollTargetRef">
         <div class="board-btn-info">게시판소개</div>
         <div class="board-search">게시판검색</div>
         <div class="board-title-list">
-          <q-infinite-scroll @load="load" :offset="300">
+          <q-infinite-scroll
+            @load="load"
+            :offset="300"
+            :scroll-target="scrollTargetRef"
+          >
             <list-item
               class="board-title-list-item"
-              v-for="(item, index) in question_list"
               :key="index"
               :item="item"
+              v-for="(item, index) in question_list"
             />
             <template v-slot:loading>
               <div class="row justify-center q-my-md">
@@ -41,6 +45,7 @@ export default {
       word: "",
       question_list: [],
     });
+    const scrollTargetRef = ref(null);
     const mvInfo = () => {
       router.push({ name: "board-info" });
     };
@@ -62,12 +67,11 @@ export default {
           for (var i = size; i < max_size; i++) {
             question_list.value.push(state.question_list[i]);
           }
-
           done(true);
         }
 
         done();
-      }, 2000);
+      }, 500);
     };
 
     onMounted(() => {
@@ -76,7 +80,7 @@ export default {
         .then(
           (response) => {
             state.question_list = response.data;
-            question_list.value.push(...state.question_list.slice(0, 5));
+            question_list.value.push(...state.question_list.slice(0, 7));
             console.log(question_list.value);
           },
           (error) => {
@@ -120,6 +124,7 @@ export default {
     return {
       question_list,
       state,
+      scrollTargetRef,
 
       mvInfo,
       mvQuestion,
