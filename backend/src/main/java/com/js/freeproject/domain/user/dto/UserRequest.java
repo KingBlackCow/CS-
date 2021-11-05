@@ -8,6 +8,9 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -17,7 +20,7 @@ public class UserRequest {
     private String nickName;
     private String name;
     private String pass;
-    private String image;
+    private MultipartFile image;
     
     public User toEntity() {
     	return User.builder()
@@ -25,7 +28,6 @@ public class UserRequest {
     			.nickName(nickName)
     			.name(name)
     			.pass(pass)
-    			.image(image)
     			.build();
     }
 }

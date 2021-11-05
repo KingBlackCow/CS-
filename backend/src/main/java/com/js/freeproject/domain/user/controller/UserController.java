@@ -141,13 +141,13 @@ public class UserController {
 		}	
 	}
 	
-	@PutMapping("modify")
+	@PostMapping("modify")
 	@ApiOperation(value="사용자 정보 수정",notes="사용자 정보를 수정한다.")
 	@ApiResponses({
 		@ApiResponse(code=200,message="성공", response = CommonResponse.class),
 		@ApiResponse(code=500,message="서버 오류",response=CommonResponse.class)
 	})
-	public ResponseEntity<?> modifyUser(@RequestBody UserRequest userRequest) {
+	public ResponseEntity<?> modifyUser(UserRequest userRequest) {
 		try {
 			userRequest.setPass(passwordEncoder.encode(userRequest.getPass()));
 			userService.modifyUser(userRequest);

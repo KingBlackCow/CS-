@@ -36,6 +36,15 @@ public class S3Service {
         return upload(uploadFile, dirName);
     }
 
+
+    public String uploadImage(MultipartFile multipartFile, String dirName) throws IOException {
+        File uploadFile = convert(multipartFile).orElseThrow(
+                () -> new IllegalArgumentException("MultipartFile => File 변환에 실패했습니다.")
+        );
+        return uploadImage(uploadFile, dirName);
+    }
+
+
     public void deleteFile(String fileName) {
         try {
             DeleteObjectRequest deleteObjectRequest = new DeleteObjectRequest(this.bucket, "board/" + fileName);
@@ -64,6 +73,17 @@ public class S3Service {
 
         removeNewFile(uploadFile);
         return dto;
+    }
+
+    private String uploadImage(File uploadFile, String dirName) {
+        String fileName = dirName
+                + "/"
+                + UUID.randomUUID().toString()
+                + "."
+                + FilenameUtils.getExtension(uploadFile.getName());
+        String uploadUrl = putS3(uploadFile, fileName);
+        removeNewFile(uploadFile);
+        return uploadUrl;
     }
 
     private String putS3(File uploadFile, String fileName) {
