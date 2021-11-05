@@ -1,4 +1,4 @@
-package com.js.freeproject.global.jwt;
+package com.js.freeproject.global.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -9,6 +9,7 @@ public class WebConfig implements WebMvcConfigurer {
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**")
-		.allowedMethods("GET","PUT","POST","DELETE");
+		.allowedMethods("GET","PUT","POST","DELETE")
+		.allowedOrigins("*");
 	}
 }

@@ -42,9 +42,6 @@ public class User {
     private UserRole role;
     
     private String image;
-    
-    @OneToMany(mappedBy = "user")
-    private List<ScoreHistory> scorehistorys;
 
 	@Builder
     public User(String email, String nickName, String name, String pass, String image) {
