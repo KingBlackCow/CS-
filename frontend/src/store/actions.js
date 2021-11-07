@@ -141,3 +141,14 @@ export async function requestBoardList() {
   const url = "/board";
   return await axios.get(url);
 }
+
+export async function requestBoardWrite({ state }, payload) {
+  console.log("requestBoardWrite", state, payload);
+  const url = `/board/${payload.id}?title=${payload.title}&description=${payload.description}`;
+  // const body = {
+  //   title: payload.title,
+  //   description: payload.description,
+  // };
+  // return await axios.post(url, body);
+  return await axios.post(url);
+}

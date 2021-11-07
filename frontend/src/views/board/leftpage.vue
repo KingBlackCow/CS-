@@ -2,8 +2,13 @@
   <div class="left-wrap">
     <div class="open-left-wrap">
       <div class="board-nav">
-        <div class="board-btn-info">
-          <div @click="mvInfo">게시판소개</div>
+        <div class="board-btn">
+          <div class="btn-board-info" @click="mvInfo">게시판소개</div>
+          <div class="row">
+            <div class="btn-board-write" @click="mvWrite">
+              <q-icon class="write-icon" name="border_color" /> 글작성
+            </div>
+          </div>
         </div>
         <div class="board-search">
           <q-input v-model="state.search_title" label="제목검색" dense>
@@ -23,7 +28,7 @@
         <div class="board-title-list" ref="scrollTargetRef">
           <q-infinite-scroll
             @load="load"
-            :offset="100"
+            :offset="25"
             :scroll-target="scrollTargetRef"
           >
             <question-list
@@ -71,6 +76,9 @@ export default {
     });
     const mvInfo = () => {
       router.push({ name: "board-info" });
+    };
+    const mvWrite = () => {
+      router.push({ name: "board-write" });
     };
 
     watch(
@@ -130,6 +138,7 @@ export default {
       question_list,
       state,
       mvInfo,
+      mvWrite,
       load,
     };
   },

@@ -120,7 +120,13 @@ const routes = [
           {
             path: "/home/board/question",
             name: "board-question",
+            props: true,
             component: () => import("../views/board/components/question.vue"),
+          },
+          {
+            path: "/home/board/write",
+            name: "board-write",
+            component: () => import("../views/board/components/write.vue"),
           },
         ],
       },
