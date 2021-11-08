@@ -156,6 +156,7 @@ export default {
       });
     };
     const getUserInfo = (jwt_token) => {
+      localStorage.setItem("token", jwt_token);
       store
         .dispatch("root/requsetUserInfo", jwt_token)
         .then(
