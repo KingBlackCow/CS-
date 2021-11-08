@@ -31,6 +31,7 @@ export default {
     const router = useRouter();
 
     const mvQuestion = () => {
+      console.log(props.question.user);
       router.push({
         name: "board-question",
         params: {
@@ -38,7 +39,7 @@ export default {
           title: props.question.title,
           description: props.question.description,
           createdAt: props.question.createdAt,
-          user: props.question.user,
+          user: JSON.stringify(props.question.user),
         },
       });
     };

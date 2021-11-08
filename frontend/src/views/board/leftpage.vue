@@ -92,7 +92,7 @@ export default {
         } else {
           let list = state.question_list;
           question_list.value = list.filter((list) =>
-            list.title.toLowerCase().includes(search.toLowerCase())
+            list.title.includes(search)
           );
         }
       }

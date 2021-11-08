@@ -121,11 +121,17 @@
   font-size: 14px;
 }
 .list-title {
-  width: 100%;
-  font-size: 18px;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+  line-height: 1.5em;
+  height: 3em;
+
+  width: 100%;
+  font-size: 18px;
 }
 .list-createdAt {
   font-size: 7px;
@@ -159,12 +165,48 @@
 }
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ board > question ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
 .board-question {
+  text-align: start !important;
   height: 100%;
-  padding: 2em 1em;
-}
-.question-title {
-  height: 10%;
-}
-.question-description {
-  height: 75%;
+  padding: 2em 4em;
+
+  .question-title {
+    height: 15%;
+    font-size: 28px;
+    height: 10%;
+    font-weight: bold;
+    margin: 0.5em 0em;
+  }
+  .question-user {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 1em;
+
+    .question-user-image {
+      overflow: hidden;
+      border-radius: 50%;
+      margin-right: 0.25em;
+      .question-user-image-circle {
+        display: block;
+        width: 36px;
+        height: 36px;
+      }
+    }
+    .question-user-nicnName {
+      width: 25%;
+      margin-right: 0.5em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+  .question-createdAt {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .question-description {
+    height: 75%;
+  }
 }

@@ -1,9 +1,17 @@
 <template lang="">
   <div class="board-question">
     <div class="question-title">{{ title }}</div>
-    <div class="question-user">{{ user.name }} {{ user.nickName }}</div>
-    <div class="question-createAt">{{ createdAt }}</div>
+    <div class="question-createdAt">{{ createdAt }}</div>
+    <div class="question-user">
+      <div class="question-user-image">
+        <img :src="state.user.image" class="question-user-image-circle" />
+      </div>
+      <div class="question-user-nickName">
+        {{ state.user.nickName }}
+      </div>
+    </div>
     <div class="question-description" id="viewer"></div>
+    <!-- 코멘트 입력하기 -->
   </div>
 </template>
 <script>
@@ -20,10 +28,13 @@ export default {
     title: String,
     description: String,
     createdAt: String,
-    user: Object,
+    user: String,
   },
   setup(props) {
+    console.log(props);
+    console.log(props.user);
     const state = reactive({
+      user: JSON.parse(props.user),
       viewer: null,
     });
     watch(
