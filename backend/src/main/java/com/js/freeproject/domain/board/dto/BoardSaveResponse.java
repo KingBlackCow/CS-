@@ -12,12 +12,25 @@ public class BoardSaveResponse {
     private Long id;
     private String title;
     private String description;
-    private User user;
+    private UserResponse user;
 
     public BoardSaveResponse(final Board board) {
         this.id = board.getId();
         this.title = board.getTitle();
         this.description = board.getDescription();
-        this.user = board.getUser();
+        this.user = new UserResponse(board.getUser());
+    }
+
+    @Getter
+    static class UserResponse {
+        private Long id;
+        private String nickname;
+        private String image;
+
+        public UserResponse(User user) {
+            this.id = user.getId();
+            this.nickname = user.getNickName();
+            this.image = user.getImage();
+        }
     }
 }

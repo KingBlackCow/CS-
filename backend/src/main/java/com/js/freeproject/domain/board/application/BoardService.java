@@ -1,8 +1,10 @@
 package com.js.freeproject.domain.board.application;
 
 //import com.js.freeproject.domain.amazonS3.S3Service;
+
 import com.js.freeproject.domain.board.domain.Board;
 import com.js.freeproject.domain.board.domain.BoardRepository;
+import com.js.freeproject.domain.board.dto.BoardUserResponse;
 import com.js.freeproject.domain.board.dto.BoardListResponse;
 import com.js.freeproject.domain.board.dto.BoardRequest;
 import com.js.freeproject.domain.board.dto.BoardResponse;
@@ -20,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.*;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -31,7 +35,7 @@ public class BoardService {
     private final CommentService commentService;
 
     @Transactional
-    public Board saveQuestion(final BoardRequest boardRequest,final Long userId) throws IOException {
+    public Board saveQuestion(final BoardRequest boardRequest, final Long userId) throws IOException {
         User searchUser = userRepository.findById(userId).orElseThrow(IllegalArgumentException::new);
         Board boardEntity = boardRequest.toEntity();
         Board question = Board.builder()
@@ -41,27 +45,38 @@ public class BoardService {
                 .build();
         Board savedBoard = boardRepository.save(question);
 
-        if(boardRequest.getBoardFiles()!=null){
+        if (boardRequest.getBoardFiles() != null) {
             boardFileService.saveBoardFiles(boardRequest.getBoardFiles(), savedBoard.getId());
         }
         return savedBoard;
     }
 
-    public List<BoardListResponse> findAllBoard(){
+    public List<BoardListResponse> findAllBoard() {
         List<Board> boards = boardRepository.findAll();
         return boards.stream()
                 .map(BoardListResponse::ofBoard)
-                .collect(Collectors.toList());
+                .collect(toList());
     }
 
-    public BoardResponse findById(final Long boardId){
+    public BoardResponse findById(final Long boardId) {
         Board searchBoard = boardRepository.findById(boardId).orElseThrow(IllegalArgumentException::new);
         List<BoardFile> searchBoardFiles = boardFileService.findBoardFiles(boardId);
         //댓글들을 담기
         Map<String, List> commentOfBoard = commentService.getCommentOfBoard(searchBoard.getComments());
         //파일 있으면 가져오기
         commentOfBoard.put("files", searchBoardFiles);
-        BoardResponse boardResponse = new BoardResponse(searchBoard,commentOfBoard);
+        BoardResponse boardResponse = new BoardResponse(searchBoard, commentOfBoard);
+        return boardResponse;
+    }
+
+    public BoardResponse findContentById(final Long boardId) {
+        Board searchBoard = boardRepository.findById(boardId).orElseThrow(IllegalArgumentException::new);
+        List<BoardFile> searchBoardFiles = boardFileService.findBoardFiles(boardId);
+        //댓글들을 담기
+        Map<String, List> commentOfBoard = commentService.getCommentOfBoard(searchBoard.getComments());
+        //파일 있으면 가져오기
+        commentOfBoard.put("files", searchBoardFiles);
+        BoardResponse boardResponse = new BoardResponse(searchBoard, commentOfBoard);
         return boardResponse;
     }
 
@@ -73,5 +88,15 @@ public class BoardService {
     }
 
 
-
+    public List<BoardUserResponse> findByUserId(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다."));
+        List<Board> boards = boardRepository.findByUserID(user);
+        if(boards.isEmpty()){
+            throw new IllegalStateException("해당 유저가 쓴 글이 없습니다.");
+        }
+        List<BoardUserResponse> boardUserResponse = boards.stream()
+                .map(BoardUserResponse::new).collect(toList());
+        return boardUserResponse;
+    }
 }
