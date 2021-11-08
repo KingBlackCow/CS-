@@ -27,6 +27,8 @@ server:
 logging.level:
   org.hibernate.SQL: debug
 spring:
+  pid:
+    file: ~/S05P31C101/backend/build/libs/FreeProject-0.0.1-SNAPSHOT.pid
   messages:
     basename: i18n/messages
     encoding: UTF-8
