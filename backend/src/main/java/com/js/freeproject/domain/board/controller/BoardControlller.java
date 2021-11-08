@@ -37,9 +37,16 @@ public class BoardControlller {
 
     @ApiOperation(value = "게시판 컨텐츠 조회")
     @GetMapping("/content/{boardId}")
+    @ApiResponses({
+            @ApiResponse(code=400,message="해당 게시판이 존재하지 않습니다.",response = ErrorResult.class),
+            @ApiResponse(code=500,message="게시판컨텐츠가 존재하지 않습니다.",response = ErrorResult.class)
+    })
     public ResponseEntity getBoardContent(@PathVariable Long boardId){
         BoardResponse boardResponse = boardService.findById(boardId);
         List<BoardFile> boardFiles = boardResponse.getBoardFiles();
+        if(boardFiles.isEmpty()){
+            throw new IllegalStateException("게시판컨텐츠가 존재하지 않습니다.");
+        }
         return ResponseEntity.ok().body(boardFiles);
     }
 

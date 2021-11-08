@@ -59,7 +59,7 @@ public class BoardService {
     }
 
     public BoardResponse findById(final Long boardId) {
-        Board searchBoard = boardRepository.findById(boardId).orElseThrow(IllegalArgumentException::new);
+        Board searchBoard = boardRepository.findById(boardId).orElseThrow(() -> new IllegalArgumentException("해당 게시판이 존재하지 않습니다."));
         List<BoardFile> searchBoardFiles = boardFileService.findBoardFiles(boardId);
         //댓글들을 담기
         Map<String, List> commentOfBoard = commentService.getCommentOfBoard(searchBoard.getComments());
@@ -92,7 +92,7 @@ public class BoardService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("유저가 존재하지 않습니다."));
         List<Board> boards = boardRepository.findByUserID(user);
-        if(boards.isEmpty()){
+        if (boards.isEmpty()) {
             throw new IllegalStateException("해당 유저가 쓴 글이 없습니다.");
         }
         List<BoardUserResponse> boardUserResponse = boards.stream()
