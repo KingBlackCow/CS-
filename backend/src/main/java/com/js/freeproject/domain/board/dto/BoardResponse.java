@@ -1,17 +1,18 @@
 package com.js.freeproject.domain.board.dto;
 
-import com.js.freeproject.domain.board.domain.Board;
-import com.js.freeproject.domain.boardpicture.domain.BoardPicture;
-import com.js.freeproject.domain.comment.domain.Comment;
-import com.js.freeproject.domain.file.domain.BoardFile;
-import com.js.freeproject.domain.user.domain.User;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.js.freeproject.domain.board.domain.Board;
+import com.js.freeproject.domain.comment.domain.Comment;
+import com.js.freeproject.domain.file.domain.BoardFile;
+import com.js.freeproject.domain.user.domain.User;
+
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -20,7 +21,8 @@ public class BoardResponse {
     private String title;
     private String description;
     private User user;
-    private LocalDateTime createdAt;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createAt;
     private List<Comment> answerComment;
     private List<Comment> coComment;
     private List<BoardFile> boardFiles;
@@ -30,7 +32,7 @@ public class BoardResponse {
         this.title = board.getTitle();
         this.description = board.getDescription();
         this.user = board.getUser();
-        this.createdAt = board.getCreateDate();
+        this.createAt = board.getCreateDate();
         this.answerComment = map.get("answerComment");
         this.coComment = map.get("coComment");
         this.boardFiles = map.get("files");

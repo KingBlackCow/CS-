@@ -1,15 +1,16 @@
 package com.js.freeproject.domain.board.dto;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.js.freeproject.domain.board.domain.Board;
-import com.js.freeproject.domain.boardpicture.domain.BoardPicture;
 import com.js.freeproject.domain.file.domain.BoardFile;
 import com.js.freeproject.domain.user.domain.User;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -18,6 +19,7 @@ public class BoardListResponse {
     private String title;
     private String description;
     private User user;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
     private List<BoardFile> boardFiles;
 

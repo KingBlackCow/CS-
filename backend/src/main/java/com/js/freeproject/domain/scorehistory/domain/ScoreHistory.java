@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.js.freeproject.domain.category.domain.Category;
 import com.js.freeproject.domain.user.domain.User;
 
@@ -28,6 +29,8 @@ public class ScoreHistory {
 	private Long id;
 	
 	private Integer score;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date createdate;
 	
 	@ManyToOne(fetch = FetchType.LAZY)

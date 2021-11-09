@@ -2,6 +2,7 @@ package com.js.freeproject.domain.board.dto;
 
 import com.js.freeproject.domain.board.domain.Board;
 import com.js.freeproject.domain.user.domain.User;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

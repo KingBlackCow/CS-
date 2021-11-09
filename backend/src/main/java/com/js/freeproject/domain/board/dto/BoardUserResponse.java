@@ -1,15 +1,18 @@
 package com.js.freeproject.domain.board.dto;
 
-import com.js.freeproject.domain.board.domain.Board;
-import lombok.Getter;
-
 import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.js.freeproject.domain.board.domain.Board;
+
+import lombok.Getter;
 
 @Getter
 public class BoardUserResponse {
     private Long id;
     private String title;
     private String description;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createDate;
 
     public BoardUserResponse(Board board) {

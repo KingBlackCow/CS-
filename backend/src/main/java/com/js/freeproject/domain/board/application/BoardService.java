@@ -1,28 +1,27 @@
 package com.js.freeproject.domain.board.application;
 
-//import com.js.freeproject.domain.amazonS3.S3Service;
+import static java.util.stream.Collectors.toList;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.js.freeproject.domain.board.domain.Board;
 import com.js.freeproject.domain.board.domain.BoardRepository;
-import com.js.freeproject.domain.board.dto.BoardUserResponse;
 import com.js.freeproject.domain.board.dto.BoardListResponse;
 import com.js.freeproject.domain.board.dto.BoardRequest;
 import com.js.freeproject.domain.board.dto.BoardResponse;
+import com.js.freeproject.domain.board.dto.BoardUserResponse;
 import com.js.freeproject.domain.comment.application.CommentService;
 import com.js.freeproject.domain.file.application.BoardFileService;
 import com.js.freeproject.domain.file.domain.BoardFile;
 import com.js.freeproject.domain.user.domain.User;
 import com.js.freeproject.domain.user.domain.UserRepository;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.*;
 
 @Service
 @RequiredArgsConstructor
