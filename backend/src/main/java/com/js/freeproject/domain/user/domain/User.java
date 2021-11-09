@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import com.js.freeproject.domain.scorehistory.domain.ScoreHistory;
 
@@ -26,6 +27,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @DynamicInsert
+@DynamicUpdate
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,11 +58,17 @@ public class User {
         this.pass = pass;
     }
 
+    /*
     public void updateUser(final User user, String imageUrl) {
         this.email = user.getEmail();
         this.nickName = user.getNickName();
         this.name = user.getName();
         this.pass = user.getPass();
         this.image = imageUrl;
+    }
+    */
+    
+    public void updateUser(String imageUrl) {
+    	this.image = imageUrl;
     }
 }

@@ -149,7 +149,9 @@ public class UserController {
 	})
 	public ResponseEntity<?> modifyUser(UserRequest userRequest) {
 		try {
-			userRequest.setPass(passwordEncoder.encode(userRequest.getPass()));
+			if(userRequest.getPass()!=null) {
+				userRequest.setPass(passwordEncoder.encode(userRequest.getPass()));
+			}
 			userService.modifyUser(userRequest);
 			
 			return ResponseEntity.status(200).body(CommonResponse.of("Success"));

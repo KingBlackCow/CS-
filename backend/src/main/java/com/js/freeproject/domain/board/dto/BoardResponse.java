@@ -22,7 +22,7 @@ public class BoardResponse {
     private String description;
     private User user;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
     private List<Comment> answerComment;
     private List<Comment> coComment;
     private List<BoardFile> boardFiles;
@@ -32,7 +32,7 @@ public class BoardResponse {
         this.title = board.getTitle();
         this.description = board.getDescription();
         this.user = board.getUser();
-        this.createAt = board.getCreateDate();
+        this.createdAt = board.getCreateDate();
         this.answerComment = map.get("answerComment");
         this.coComment = map.get("coComment");
         this.boardFiles = map.get("files");
