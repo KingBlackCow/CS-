@@ -29,3 +29,11 @@ export function getSeries(state) {
 export function getProblem(state) {
   return state.series;
 }
+
+export function getScoreHistory(state) {
+  return state.scorehistory;
+}
+
+export function getScoreHistoryByCategory(state) {
+  return state.scorehistoryByCategory;
+}

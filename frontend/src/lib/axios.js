@@ -1,14 +1,23 @@
 import axios from "axios";
-//const token = localStorage.getItem("token");
+
 const instance = axios.create({
-  // baseURL: "/",
-  // baseURL: "/api/v1",
-  //baseURL: "http://localhost:8080",
-  baseURL: "http://k5c101.p.ssafy.io/api",
+  baseURL: "http://localhost:8080",
+  //baseURL: "http://k5c101.p.ssafy.io",
   headers: {
     "Content-type": "application/json",
-    Authorization: "Bearer " + localStorage.getItem("token"),
   },
 });
 
+function createInstance() {
+  const instance = axios.create({
+    baseURL: "http://localhost:8080",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + localStorage.getItem("token"),
+    },
+  });
+  return instance;
+}
+
+export { createInstance };
 export default instance;

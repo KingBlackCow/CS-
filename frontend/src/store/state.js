@@ -8,4 +8,6 @@ export default {
   series: [], //그래프 결과
   problemNum: "",
   selectedCategory: {}, //선택된 문제 카테고리
+  scorehistory: [],
+  scorehistoryByCategory: [],
 };

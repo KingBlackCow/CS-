@@ -53,6 +53,13 @@
               type="email"
               label="이메일 *"
             />
+            <q-btn
+              outline
+              color="primary"
+              label="중복확인"
+              @click="emailCheck()"
+              class="register-btns horizontal-r"
+            ></q-btn>
           </div>
           <div class="submit-btns">
             <q-btn color="primary" type="submit" label="회원가입" />

@@ -1,7 +1,9 @@
 package com.js.freeproject.domain.scorehistory.application;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.js.freeproject.domain.scorehistory.domain.ScoreHistoryResponse;
 import org.springframework.stereotype.Service;
 
 import com.js.freeproject.domain.category.domain.Category;
@@ -16,12 +18,14 @@ import lombok.RequiredArgsConstructor;
 public class ScoreHistoryService {
 	private final ScoreHistoryRepository scoreHistoryRepo;
 	
-	public List<ScoreHistory> getScore(User user) {
-		return scoreHistoryRepo.findByUser(user);
+	public List<ScoreHistoryResponse> getScore(User user) {
+		List<ScoreHistory> scoreHistories = scoreHistoryRepo.findByUser(user);
+		return scoreHistories.stream().map(ScoreHistoryResponse::new).collect(Collectors.toList());
 	}
 	
-	public List<ScoreHistory> getScoreCategory(User user,Category category) {
-		return scoreHistoryRepo.findByCategoryAndUser(category, user);
+	public List<ScoreHistoryResponse> getScoreCategory(User user, Category category) {
+		List<ScoreHistory> scoreHistories = scoreHistoryRepo.findByCategoryAndUser(category, user);
+		return scoreHistories.stream().map(ScoreHistoryResponse::new).collect(Collectors.toList());
 	}
 	
 	public void saveScore(User user,Long cateogry_id, Integer score) {

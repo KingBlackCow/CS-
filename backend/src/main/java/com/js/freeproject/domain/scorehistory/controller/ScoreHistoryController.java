@@ -3,6 +3,7 @@ package com.js.freeproject.domain.scorehistory.controller;
 import java.util.List;
 import java.util.Map;
 
+import com.js.freeproject.domain.scorehistory.domain.ScoreHistoryResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -47,7 +48,7 @@ public class ScoreHistoryController {
 		
 		User user = userService.findByUserEmail(accountDetailes.getUseremail());
 		
-		List<ScoreHistory> scorehistorys = scoreHistoryService.getScore(user);
+		List<ScoreHistoryResponse> scorehistorys = scoreHistoryService.getScore(user);
 		
 		return ResponseEntity.status(200).body(scorehistorys);
 	}
@@ -65,7 +66,7 @@ public class ScoreHistoryController {
 		Category category = new Category();
 		category.setId(category_id);
 		
-		List<ScoreHistory> scorehistorys = scoreHistoryService.getScoreCategory(user, category);
+		List<ScoreHistoryResponse> scorehistorys = scoreHistoryService.getScoreCategory(user, category);
 		
 		return ResponseEntity.status(200).body(scorehistorys);
 	}

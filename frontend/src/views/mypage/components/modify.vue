@@ -79,7 +79,7 @@ export default {
     const quasar = useQuasar();
     const state = reactive({
       user: JSON.parse(localStorage.getItem("userInfo")),
-      imageurl: require("../../../assets/malang.png"),
+      imageurl: store.getters["root/getUser"].image,
       file: null,
       form: {
         nickName: store.getters["root/getUser"].nickname,

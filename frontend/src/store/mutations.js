@@ -32,3 +32,13 @@ export function setProblemResultsInit(state) {
   state.problemResults.length = 0;
   state.series.length = 0;
 }
+
+export function setScoreHistory(state, payload) {
+  state.scorehistory.length = 0;
+  state.scorehistory.push(payload);
+}
+
+export function setScoreHistoryByCategory(state, payload) {
+  state.scorehistoryByCategory.length = 0;
+  state.scorehistoryByCategory.push(payload);
+}

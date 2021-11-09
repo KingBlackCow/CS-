@@ -91,7 +91,33 @@ export default {
     const mvMypage = () => {
       removeColor();
       addColor("menuBtn4");
-      router.push({ name: "mypage-chart" });
+      store
+        .dispatch("root/requsetMyChart")
+        .then(
+          (response) => {
+            store.commit("root/setScoreHistory", response.data);
+            store
+              .dispatch("root/requsetMyChartByCategory", 3)
+              .then((response) => {
+                store.commit("root/setScoreHistoryByCategory", response.data);
+                store
+                  .dispatch("root/requsetCategoryList")
+                  .then((response) => {
+                    store.commit("root/setCategories", response.data);
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                  });
+                router.push({ name: "mypage-chart" });
+              });
+          },
+          (error) => {
+            console.log(error);
+          }
+        )
+        .catch((error) => {
+          console.log(error);
+        });
     };
     const mvLogout = () => {
       let flag = confirm("로그아웃하시겠습니까?");

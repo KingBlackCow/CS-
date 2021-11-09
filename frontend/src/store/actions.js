@@ -1,5 +1,5 @@
 import axios from "@/lib/axios";
-
+import { createInstance } from "@/lib/axios";
 // http://localhost:8080/swagger-ui.html
 
 // ! {state}, console삭제하면 payload제대로 안넘어감
@@ -131,8 +131,24 @@ export async function requestProblemEvaluate({ state }, payload) {
 // 문제결과 저장하기
 export async function requestSaveResult({ state }, payload) {
   console.log("requestProblemEvaluate", state, payload);
+  const instance = createInstance();
   const url = "/score";
-  return await axios.post(url, payload);
+  return await instance.post(url, payload);
+}
+
+// 나의 차트가져오기
+export async function requsetMyChart({ state }) {
+  console.log("requsetMyChart", state);
+  const instance = createInstance();
+  const url = "/score";
+  return await instance.get(url);
+}
+
+export async function requsetMyChartByCategory({ state }, payload) {
+  console.log("requsetMyChartByCategory", state);
+  const instance = createInstance();
+  const url = `/score/${payload}`;
+  return await instance.get(url);
 }
 
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ 게시판 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
