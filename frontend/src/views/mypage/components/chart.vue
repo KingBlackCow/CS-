@@ -1,7 +1,7 @@
 <template lang="">
-  <div style="overflow: auto; width: 100%; height: 100%">
+  <div style="overflow: auto; width: 100%; height: 100%" data-aos="fade-up">
     <h3><b>최근기록</b></h3>
-    <div class="row justify-center">
+    <div class="row justify-center" data-aos="fade-left">
       <apexchart
         width="500"
         height="350"
@@ -12,7 +12,7 @@
     </div>
 
     <h3><b>과목별기록</b></h3>
-    <div class="row justify-center item-center">
+    <div class="row justify-center item-center" data-aos="fade-left">
       <q-btn
         v-for="(category, index) in state.categories"
         :key="index"

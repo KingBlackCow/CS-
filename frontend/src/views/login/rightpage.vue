@@ -61,16 +61,36 @@
         :email="state.emailcheck.email"
         @mvlogin="mvLogin"
       ></update-pw-dialog>
+      <!-- <q-btn round size="sm" color="accent" @click="showNotif('center')">
+        <q-icon name="fullscreen_exit" />
+      </q-btn> -->
+      <q-btn label="Alert" color="primary" @click="state.alert = true" />
+      <q-dialog v-model="alert">
+        <q-card>
+          <q-card-section>
+            <div class="text-h6">Alert</div>
+          </q-card-section>
+
+          <q-card-section class="q-pt-none">
+            비밀번호가 다릅니다.
+          </q-card-section>
+
+          <q-card-actions align="right">
+            <q-btn flat label="OK" color="primary" v-close-popup />
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
     </div>
   </div>
 </template>
 <script>
-import { ref, reactive, watch } from "vue";
+import { ref, reactive, watch, onBeforeUnmount } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import FindPwDialog from "./components/findpw.vue";
 import EmailCheckDialog from "./components/emailcheck.vue";
 import UpdatePwDialog from "./components/updatepw.vue";
+import { useQuasar } from "quasar";
 import "../../styles/register.scss";
 
 export default {
@@ -81,10 +101,29 @@ export default {
     UpdatePwDialog,
   },
   setup() {
+    const $q = useQuasar();
+
+    let timer;
+    onBeforeUnmount(() => {
+      if (timer !== void 0) {
+        clearTimeout(timer);
+        $q.loading.hide();
+      }
+    });
+    const alerts = [
+      { message: "존재하지 않는 이메일입니다.", icon: "thumb_up" },
+      {
+        color: "teal",
+        message: "비밀번호를 잘못입력하셨습니다.",
+        icon: "tag_faces",
+      },
+    ];
+
     const login_form = ref(null); // 로그인폼저장
     const store = useStore();
     const router = useRouter();
     const state = reactive({
+      alert: ref(false),
       form: {
         email: "",
         pass: "",
@@ -134,6 +173,7 @@ export default {
     );
     /*ㅡㅡㅡㅡㅡ 버튼 ㅡㅡㅡㅡㅡ*/
     const onSubmit = () => {
+      showLoading();
       login_form.value.validate().then((success) => {
         if (success) {
           store
@@ -142,12 +182,14 @@ export default {
               pass: state.form.pass,
             })
             .then((response) => {
-              console.log("requestUserLogin", response.data);
+              $q.loading.hide();
               getUserInfo(response.data.token);
               localStorage.setItem("token", response.data.token);
               saveProblemCategory();
             })
             .catch((error) => {
+              $q.loading.hide();
+              state.alert = ref(true);
               alert(error.response.data.message);
             });
         } else {
@@ -217,6 +259,14 @@ export default {
         });
     };
 
+    const showLoading = () => {
+      $q.loading.show({
+        message: "로그인 중입니다",
+        boxClass: "bg-grey-2 text-grey-9",
+        spinnerColor: "primary",
+      });
+    };
+
     return {
       login_form,
       state,
@@ -227,6 +277,53 @@ export default {
       openEmailCheckDialog,
       openUpdatePwDialog,
       mvLogin,
+      showLoading,
+      alert: ref(false),
+      showNotif(position) {
+        const { color, textColor, multiLine, icon, message, avatar } =
+          alerts[Math.floor(Math.random(alerts.length) * 10) % alerts.length];
+        const random = Math.random() * 100;
+        const twoActions = random > 70;
+        const buttonColor = color ? "white" : void 0;
+        $q.notify({
+          color,
+          textColor,
+          icon: random > 30 ? icon : null,
+          message,
+          position,
+          avatar,
+          multiLine,
+          actions: twoActions
+            ? [
+                {
+                  label: "Reply",
+                  color: buttonColor,
+                  handler: () => {
+                    /* console.log('wooow') */
+                  },
+                },
+                {
+                  label: "Dismiss",
+                  color: "yellow",
+                  handler: () => {
+                    /* console.log('wooow') */
+                  },
+                },
+              ]
+            : random > 40
+            ? [
+                {
+                  label: "Reply",
+                  color: buttonColor,
+                  handler: () => {
+                    /* console.log('wooow') */
+                  },
+                },
+              ]
+            : null,
+          timeout: Math.random() * 5000 + 3000,
+        });
+      },
     };
   },
 };

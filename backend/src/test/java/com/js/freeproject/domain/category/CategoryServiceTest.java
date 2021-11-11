@@ -38,27 +38,17 @@
 //    @Test
 //    @Rollback(false)
 //    public void saveCategoryTest(){
-//        User user = User.builder()
-//                .email("sgs1159@naver.com")
-//                .nickName("조순몬")
-//                .name("이조순")
-//                .pass("abcd1234")
-//                .image("abd")
-//                .build();
-//        userRepository.save(user);
-//        em.persist(user);
-//        em.flush();
-//        em.clear();
-//        Category category = new Category("운영체제","컴퓨터의 기본! CS는 운영체제부터!");
+//
+//        Category category = new Category("개발자공통","개발자가 되고 싶은가");
 //        em.persist(category);
 //
-//        Category category2 = new Category("네트워크","네트워크 모르면 취업못하는거 알지?");
+//        Category category2 = new Category("백엔드공통","백엔드가 하고 싶은가");
 //        em.persist(category2);
 //
-//        Category category3 = new Category("스프링","백엔드는 스프링이지ㅋ");
+//        Category category3 = new Category("프론트 공통","프론트가 하고 싶은가");
 //        em.persist(category3);
 //
-//        Category category4 = new Category("VUE","리액트하는 사람 다죽었으면");
+//        Category category4 = new Category("데이터베이스","DB는 알면알수록 어려워~!");
 //        em.persist(category4);
 //
 //        em.flush();

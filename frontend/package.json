@@ -19,6 +19,7 @@
     "quasar": "^2.0.0",
     "vue": "^3.0.0",
     "vue-audio-recorder": "^3.0.1",
+    "vue-fullpage.js": "^0.1.7",
     "vue-router": "^4.0.0-0",
     "vue-simple-alert": "^1.1.1",
     "vue3-apexcharts": "^1.4.1",
