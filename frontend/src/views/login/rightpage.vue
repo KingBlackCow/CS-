@@ -219,7 +219,7 @@ export default {
             if (userinfo.email == "admin@naver.com") {
               router.push({ name: "approve" });
             } else {
-              router.push({ name: "login-info" });
+              router.push({ name: "information" });
             }
           },
           (error) => {

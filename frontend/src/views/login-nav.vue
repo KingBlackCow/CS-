@@ -61,7 +61,7 @@ export default {
     const mvLoginInfo = () => {
       removeColor();
       addColor("menuBtn1");
-      router.push({ name: "login-info" });
+      router.push({ name: "information" });
     };
 
     const mvProblem = () => {

@@ -41,8 +41,74 @@ const routes = [
       },
       {
         path: "/home/info",
-        name: "login-info",
-        component: () => import("../views/login-info/info.vue"),
+        name: "information",
+        component: () => import("../views/information/info.vue"),
+        children: [
+          {
+            path: "/home/info",
+            name: "info-information",
+            component: () => import("../views/information/information.vue"),
+          },
+          {
+            path: "/home/info/service/main",
+            name: "info-service-main",
+            component: () =>
+              import("../views/information/service-info/main.vue"),
+          },
+          {
+            path: "/home/info/board/main",
+            name: "info-board-main",
+            component: () => import("../views/information/board-info/main.vue"),
+          },
+          {
+            path: "/home/info/board/question",
+            name: "info-board-question",
+            component: () =>
+              import("../views/information/board-info/question.vue"),
+          },
+          {
+            path: "/home/info/board/write",
+            name: "info-board-write",
+            component: () =>
+              import("../views/information/board-info/write.vue"),
+          },
+          {
+            path: "/home/info/mypage/main",
+            name: "info-mypage-main",
+            component: () =>
+              import("../views/information/mypage-info/main.vue"),
+          },
+          {
+            path: "/home/info/mypage/chart",
+            name: "info-mypage-chart",
+            component: () =>
+              import("../views/information/mypage-info/chart.vue"),
+          },
+          {
+            path: "/home/info/problem/main",
+            name: "info-problem-main",
+            component: () =>
+              import("../views/information/problem-info/main.vue"),
+          },
+          {
+            path: "/home/info/problem/description",
+            name: "info-problem-description",
+            component: () =>
+              import("../views/information/problem-info/description.vue"),
+          },
+          {
+            path: "/home/info/problem/solve",
+            name: "info-problem-solve",
+            component: () =>
+              import("../views/information/problem-info/solve.vue"),
+          },
+          {
+            path: "/home/info/problem/result",
+            name: "info-problem-result",
+            component: () =>
+              import("../views/information/problem-info/result.vue"),
+          },
+        ],
       },
       {
         path: "/home/mypage",
