@@ -70,8 +70,8 @@ export default {
     const writeBoard = () => {
       var editor_text = state.editor.getMarkdown();
       var user = JSON.parse(localStorage.getItem("userInfo"));
-      if (state.title == null || editor_text == null) {
-        alert("제목이나 내용이 입력되지 않았습니다.");
+      if (state.title == "") {
+        alert("제목이 입력되지 않았습니다.");
         return;
       }
       store
@@ -83,7 +83,7 @@ export default {
         .then((response) => {
           console.log(response);
           alert("작성이 완료되었습니다.");
-          router.push({ name: "board-info" });
+          router.push({ name: "problem" });
           /* 내가 작성한 글로 보내기 */
           /* 마이페이지로 보내기 */
           /* 게시판 소개 페이지로 보내기 */

@@ -7,14 +7,11 @@
       </b>
     </h4>
 
-    <q-btn
-      id="menuBtn1"
-      icon="mic_outline"
-      class="speech-to-text"
-      color="red"
-      size="40px"
-      @click="startSpeechToTxt"
-    ></q-btn>
+    <q-btn round @click="startSpeechToTxt" color="red" class="speech-to-text">
+      <q-avatar size="120px">
+        <img src="https://i.ibb.co/qrtvzG3/mike.jpg" />
+      </q-avatar>
+    </q-btn>
 
     <br />
     <b>
