@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import com.js.freeproject.domain.amazonS3.S3Service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +23,7 @@ import com.js.freeproject.domain.user.domain.User;
 import com.js.freeproject.domain.user.domain.UserRepository;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 public class BoardService {
     private final BoardRepository boardRepository;
     private final UserRepository userRepository;
-
+    private final S3Service s3Service;
     private final BoardFileService boardFileService;
     private final CommentService commentService;
 
@@ -98,5 +100,10 @@ public class BoardService {
         List<BoardUserResponse> boardUserResponse = boards.stream()
                 .map(BoardUserResponse::new).collect(toList());
         return boardUserResponse;
+    }
+
+    public String saveImage(MultipartFile multipartFile) throws IOException {
+        String imageUrl = s3Service.uploadImage(multipartFile, "board");
+        return imageUrl;
     }
 }

@@ -3,6 +3,7 @@ package com.js.freeproject.domain.board.controller;
 import java.io.IOException;
 import java.util.List;
 
+import com.js.freeproject.domain.amazonS3.S3Service;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,7 +33,7 @@ import lombok.RequiredArgsConstructor;
 public class BoardControlller {
 
     private final BoardService boardService;
-    private final BoardFileService boardFileService;
+    private final S3Service s3Service;
 
     @ApiOperation(value = "게시판 글 작성")
     @PostMapping
@@ -40,6 +42,13 @@ public class BoardControlller {
         Board board = boardService.saveQuestion(boardRequest);
         final BoardSaveResponse boardSaveResponse = new BoardSaveResponse(board);
         return ResponseEntity.ok().body(boardSaveResponse);
+    }
+
+    @ApiOperation(value = "게시판 글 작성")
+    @PostMapping("/image")
+    public ResponseEntity saveBoardImage(MultipartFile multipartFile) throws IOException {
+        String imageUrl = boardService.saveImage(multipartFile);
+        return ResponseEntity.ok().body(imageUrl);
     }
 
     @ApiOperation(value = "게시판 컨텐츠 조회")

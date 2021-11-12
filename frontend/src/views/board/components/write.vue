@@ -24,6 +24,7 @@ import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
 
 import { ref, reactive, onMounted } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 export default {
   name: "board-write",
@@ -36,6 +37,7 @@ export default {
     });
 
     const ref_editor = ref(null);
+    const router = useRouter();
 
     onMounted(() => {
       state.editor = new Editor({
@@ -44,6 +46,18 @@ export default {
           document.getElementsByClassName("board-write-editor").clientHeight,
         initialEditType: "markdown",
         previewStyle: "vertical",
+      });
+      state.editor.addHook("addImageBlobHook", (blob, callback) => {
+        const formData = new FormData();
+        formData.append("multipartFile", blob);
+        store
+          .dispatch("root/requestImageSave", formData)
+          .then((response) => {
+            callback(response.data, "그림");
+          })
+          .catch((error) => {
+            alert(error.response.data);
+          });
       });
     });
     const previewBoard = () => {
@@ -56,7 +70,10 @@ export default {
     const writeBoard = () => {
       var editor_text = state.editor.getMarkdown();
       var user = JSON.parse(localStorage.getItem("userInfo"));
-      alert(user.id);
+      if (state.title == null || editor_text == null) {
+        alert("제목이나 내용이 입력되지 않았습니다.");
+        return;
+      }
       store
         .dispatch("root/requestBoardWrite", {
           userId: user.id,
@@ -65,7 +82,8 @@ export default {
         })
         .then((response) => {
           console.log(response);
-          alert(response);
+          alert("작성이 완료되었습니다.");
+          router.push({ name: "board-info" });
           /* 내가 작성한 글로 보내기 */
           /* 마이페이지로 보내기 */
           /* 게시판 소개 페이지로 보내기 */
@@ -75,12 +93,45 @@ export default {
         });
     };
 
+    const uploadImage = async (blob) => {
+      const formData = new FormData();
+      formData.append("multipartFile", blob);
+      let url = "이미지";
+      await store
+        .dispatch("root/requestImageSave", formData)
+        .then((response) => {
+          alert("안쪽" + response);
+          url = response.data;
+          return url;
+        })
+        .catch((error) => {
+          alert(error.response.data);
+        });
+    };
+
+    const BoardWrite = () => {
+      return (
+        <Editor
+          previewStyle="vertical"
+          height="600px"
+          hooks={{
+            addImageBlobHook: (blob, callback) => {
+              const img_url = uploadImage(blob);
+              alert("방가");
+              callback(img_url, "alt_text");
+            },
+          }}
+        />
+      );
+    };
+
     return {
       state,
       ref_editor,
       onMounted,
       previewBoard,
       writeBoard,
+      BoardWrite,
     };
   },
 };

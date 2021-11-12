@@ -35,7 +35,6 @@ public class BoardFileService {
         Board searchBoard = boardRepository.findById(boardId).orElseThrow(IllegalArgumentException::new);
         for (MultipartFile file:files) {
             BoardFile uploadFile = s3Service.upload(file,"board");
-            //여기서 에러 뜰까?
             uploadFile.updateBoardId(searchBoard);
             boardFileRepository.save(uploadFile);
         }

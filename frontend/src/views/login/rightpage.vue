@@ -61,25 +61,6 @@
         :email="state.emailcheck.email"
         @mvlogin="mvLogin"
       ></update-pw-dialog>
-      <!-- <q-btn round size="sm" color="accent" @click="showNotif('center')">
-        <q-icon name="fullscreen_exit" />
-      </q-btn> -->
-      <q-btn label="Alert" color="primary" @click="state.alert = true" />
-      <q-dialog v-model="alert">
-        <q-card>
-          <!-- <q-card-section>
-            <div class="text-h6">Alert</div>
-          </q-card-section> -->
-
-          <q-card-section class="q-pt-none">
-            비밀번호가 다릅니다.
-          </q-card-section>
-
-          <q-card-actions align="right">
-            <q-btn flat label="OK" color="primary" v-close-popup />
-          </q-card-actions>
-        </q-card>
-      </q-dialog>
     </div>
   </div>
 </template>

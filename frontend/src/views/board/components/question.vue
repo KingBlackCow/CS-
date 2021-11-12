@@ -28,7 +28,7 @@
             :answer="answer"
             :comment="state.question.coComment"
           ></question-answer>
-          <div style="max-width: 400px" class="row justify-center">
+          <div style="max-width: 900px" class="row justify-center">
             <q-input
               v-model="answer"
               label="댓글달기"
@@ -37,13 +37,6 @@
                 $event.target.blur();
               "
             ></q-input>
-            <q-btn
-              round
-              color="brown-5"
-              icon="directions"
-              :disable="state.login_btn_disable"
-              class="register-btns horizontal-r"
-            />
           </div>
         </div>
       </div>

@@ -32,12 +32,6 @@
                   $event.target.blur();
                 "
               ></q-input>
-              <q-btn
-                color="primary"
-                type="submit"
-                :disable="state.login_btn_disable"
-                label="입력"
-              />
             </div>
           </div>
         </div>

@@ -178,7 +178,13 @@ export async function requestBoardWrite({ state }, payload) {
   const url = "/board";
   console.log(payload);
   return await axios.post(url, payload);
-  //return await axios.post(url);
+}
+
+export async function requestImageSave({ state }, payload) {
+  console.log("requestBoardWrite", state, payload);
+  const url = "/board/image";
+  console.log(payload);
+  return await axios.post(url, payload);
 }
 
 // 사용자가 작성한 글 조회
