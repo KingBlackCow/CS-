@@ -21,6 +21,9 @@ public interface ProblemRepository extends JpaRepository<Problem, Long> {
     @Query("select p from Problem p where p.id = :id")
     Optional<Problem> findById(@Param("id") Long id);
 
+    @Query("select p from Problem p where p.id >= 103")
+    List<Problem> findTest();
+
     @EntityGraph(attributePaths = {"category"})
     @Query("select p from Problem p where p.description = :description")
     List<Problem> findByDescription (@Param("description") String description);

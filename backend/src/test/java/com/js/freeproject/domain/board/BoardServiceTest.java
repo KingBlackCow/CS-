@@ -21,6 +21,7 @@
 //import org.springframework.test.web.servlet.MockMvc;
 //
 //import javax.persistence.EntityManager;
+//import javax.transaction.Transactional;
 //import java.io.IOException;
 //import java.util.List;
 //
@@ -126,6 +127,18 @@
 //        mvc.perform(get("/api/v1/board/")
 //                        .contentType(MediaType.APPLICATION_JSON))
 //                .andExpect(status().isOk());
+//    }
+//
+//    @Test
+//    @Rollback(false)
+//    @Transactional
+//    void deleteBoard(){
+//        List<Board> all = boardRepository.findAll();
+//        for (Board b: all) {
+//            em.remove(b);
+//        }
+//        em.flush();
+//        em.clear();
 //    }
 //
 //}

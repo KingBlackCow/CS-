@@ -14,7 +14,6 @@
             프로필사진 수정
           </div>
           <div id="leftBtn3" class="myleft" @click="mvBoard">나의 게시글</div>
-          <div id="leftBtn4" class="myleft" @click="mvAlarm">알림</div>
         </div>
       </div>
     </div>
