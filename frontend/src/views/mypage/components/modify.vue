@@ -17,28 +17,27 @@
     </div>
     <div class="submit-wrap">
       <q-btn class="subbtn" type="submit" @click="modify" label="수정하기" />
-      <q-btn
-        class="subbtn"
-        type="submit"
-        @click="basicimage"
-        label="기본이미지로 변경하기"
-      />
     </div>
   </div>
 </template>
 <script>
 import { reactive } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 export default {
   name: "modify",
   setup() {
+    const router = useRouter();
     const store = useStore();
     const state = reactive({
-      user: JSON.parse(localStorage.getItem("userInfo")),
-      imageurl: store.getters["root/getUser"].image,
+      user: null,
+      imageurl: null,
       file: null,
     });
+
+    state.user = JSON.parse(localStorage.getItem("userInfo"));
+    state.imageurl = state.user.image;
 
     /*ㅡㅡㅡㅡㅡ 버튼 ㅡㅡㅡㅡㅡ*/
     const loadf = () => {
@@ -50,51 +49,47 @@ export default {
       const formData = new FormData();
       const img = document.getElementById("chooseFile").files[0];
       formData.append("email", state.user.email);
-      if (img != null) {
+      if (img == null) {
+        alert("이미지가 첨부되지 않아 기본이미지로 변경합니다");
+      } else {
         formData.append("image", img);
       }
-
-      // console.log(state.user.email);
-      // console.log(state.img);
-
       store
         .dispatch("root/requestUserModify", formData)
         .then((response) => {
-          console.log(response.data.message);
           if (response.data.message === "Success") {
             alert("변경이 완료되었습니다.");
+            store
+              .dispatch("root/requsetUserInfo", state.user.token)
+              .then((response) => {
+                var userinfo = {
+                  id: response.data.id,
+                  name: response.data.name,
+                  nickname: response.data.nickname,
+                  email: response.data.email,
+                  image: response.data.image,
+                  token: state.user.token,
+                };
+                localStorage.removeItem("userInfo");
+                localStorage.setItem("userInfo", JSON.stringify(userinfo));
+                state.user = JSON.parse(localStorage.getItem("userInfo"));
+                router.go();
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           }
+          // router.push({ name: "mypage-chart" });
         })
         .catch((error) => {
           console.log(error);
         });
     };
 
-    const basicimage = () => {
-      const formData = new FormData();
-      formData.append("email", state.user.email);
-      formData.append("image", null);
-
-      // console.log(state.user.email);
-      // console.log(state.img);
-
-      store
-        .dispatch("root/requestUserModify", formData)
-        .then((response) => {
-          console.log(response.data.message);
-          if (response.data.message === "Success") {
-            alert("변경이 완료되었습니다.");
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
     return {
       state,
       loadf,
       modify,
-      basicimage,
     };
   },
 };

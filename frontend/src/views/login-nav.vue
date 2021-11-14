@@ -52,8 +52,9 @@ export default {
     });
 
     onBeforeMount(() => {
-      state.user = store.getters["root/getUser"];
-      if (state.user.email == "admin@naver.com") {
+      if (
+        JSON.parse(localStorage.getItem("userInfo")).email == "admin@naver.com"
+      ) {
         state.admin = true;
       }
     });
