@@ -136,6 +136,13 @@ export async function requestWriteComment({ state }, payload) {
   return await axios.post(url, payload);
 }
 
+// 게시판 글 삭제
+export async function requestDelete({ state }, payload) {
+  console.log("requestDelete", state);
+  const url = "/board/delete/" + payload;
+  return await axios.delete(url);
+}
+
 // 문제결과 저장하기
 export async function requestSaveResult({ state }, payload) {
   console.log("requestProblemEvaluate", state, payload);

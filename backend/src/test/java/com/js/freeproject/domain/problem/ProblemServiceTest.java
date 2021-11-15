@@ -1,54 +1,54 @@
-package com.js.freeproject.domain.problem;
-
-import com.js.freeproject.domain.answer.domain.Answer;
-import com.js.freeproject.domain.category.domain.Category;
-import com.js.freeproject.domain.category.domain.CategoryRepository;
-import com.js.freeproject.domain.problem.application.ProblemService;
-import com.js.freeproject.domain.problem.domain.Problem;
-import com.js.freeproject.domain.problem.domain.ProblemRepository;
-import com.js.freeproject.domain.problem.domain.ProblemStatus;
-import com.js.freeproject.domain.problempicture.domain.ProblemPicture;
-import com.js.freeproject.domain.problempicture.domain.ProblemPictureRepository;
-import com.js.freeproject.domain.user.domain.User;
-import com.js.freeproject.domain.user.domain.UserRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.*;
-
-@SpringBootTest
-@Transactional
-@Rollback(false)
-class ProblemServiceTest {
-
-    @Autowired
-    EntityManager em;
-
-    @Autowired
-    ProblemService problemService;
-
-    @Autowired
-    ProblemRepository problemRepository;
-
-    @Autowired
-    ProblemPictureRepository problemPictureRepository;
-
-    @Autowired
-    CategoryRepository categoryRepository;
-
-    @Autowired
-    UserRepository userRepository;
+//package com.js.freeproject.domain.problem;
+//
+//import com.js.freeproject.domain.answer.domain.Answer;
+//import com.js.freeproject.domain.category.domain.Category;
+//import com.js.freeproject.domain.category.domain.CategoryRepository;
+//import com.js.freeproject.domain.problem.application.ProblemService;
+//import com.js.freeproject.domain.problem.domain.Problem;
+//import com.js.freeproject.domain.problem.domain.ProblemRepository;
+//import com.js.freeproject.domain.problem.domain.ProblemStatus;
+//import com.js.freeproject.domain.problempicture.domain.ProblemPicture;
+//import com.js.freeproject.domain.problempicture.domain.ProblemPictureRepository;
+//import com.js.freeproject.domain.user.domain.User;
+//import com.js.freeproject.domain.user.domain.UserRepository;
+//import org.junit.jupiter.api.BeforeEach;
+//import org.junit.jupiter.api.Test;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.test.context.SpringBootTest;
+//import org.springframework.data.domain.PageRequest;
+//import org.springframework.test.annotation.Rollback;
+//import org.springframework.transaction.annotation.Transactional;
+//
+//import javax.persistence.EntityManager;
+//
+//import java.util.ArrayList;
+//import java.util.List;
+//import java.util.Optional;
+//
+//import static org.assertj.core.api.Assertions.*;
+//
+//@SpringBootTest
+//@Transactional
+//@Rollback(false)
+//class ProblemServiceTest {
+//
+//    @Autowired
+//    EntityManager em;
+//
+//    @Autowired
+//    ProblemService problemService;
+//
+//    @Autowired
+//    ProblemRepository problemRepository;
+//
+//    @Autowired
+//    ProblemPictureRepository problemPictureRepository;
+//
+//    @Autowired
+//    CategoryRepository categoryRepository;
+//
+//    @Autowired
+//    UserRepository userRepository;
 
 //    @BeforeEach
 //    @Rollback(false)
@@ -200,4 +200,4 @@ class ProblemServiceTest {
 //        em.clear();
 //    }
 
-}
+//}

@@ -30,7 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 @CrossOrigin(origins = {"*"}, maxAge = 6000)
 @RequestMapping("/board")
 @Slf4j
-public class BoardControlller {
+public class BoardController {
 
     private final BoardService boardService;
     private final S3Service s3Service;
@@ -48,6 +48,13 @@ public class BoardControlller {
     @PostMapping("/image")
     public ResponseEntity saveBoardImage(MultipartFile multipartFile) throws IOException {
         String imageUrl = boardService.saveImage(multipartFile);
+        return ResponseEntity.ok().body(imageUrl);
+    }
+
+    @ApiOperation(value = "게시판 글 삭제")
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity deleteBoard(@PathVariable Long id) throws IOException {
+        String imageUrl = boardService.deleteBoard(id);
         return ResponseEntity.ok().body(imageUrl);
     }
 

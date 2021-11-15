@@ -5,6 +5,7 @@ import static java.util.stream.Collectors.toList;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.js.freeproject.domain.amazonS3.S3Service;
 import org.springframework.stereotype.Service;
@@ -105,5 +106,13 @@ public class BoardService {
     public String saveImage(MultipartFile multipartFile) throws IOException {
         String imageUrl = s3Service.uploadImage(multipartFile, "board");
         return imageUrl;
+    }
+
+    @Transactional
+    public String deleteBoard(Long id) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("해당 게시판이 없습니다."));
+        boardRepository.deleteById(id);
+        return "success";
     }
 }
