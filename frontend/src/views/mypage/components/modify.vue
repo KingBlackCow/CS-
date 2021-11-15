@@ -1,6 +1,6 @@
 <template>
   <div class="modify-wrap">
-    <span class="modify-title">프로필 수정하기</span>
+    <span class="modify-title"><b>프로필 수정하기</b></span>
     <div class="form-wrap">
       <div class="modify-image">
         <img class="modi-img" :src="state.imageurl" />
@@ -16,7 +16,13 @@
       </div>
     </div>
     <div class="submit-wrap">
-      <q-btn class="subbtn" type="submit" @click="modify" label="수정하기" />
+      <q-btn
+        class="subbtn"
+        type="submit"
+        @click="modify"
+        color="brown-5"
+        label="수정하기"
+      />
     </div>
   </div>
 </template>

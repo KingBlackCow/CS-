@@ -153,6 +153,7 @@
       display: block;
       width: 36px;
       height: 36px;
+      object-fit: cover;
     }
   }
   .list-user-nickName {
@@ -164,6 +165,7 @@
   }
 }
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ board > question ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+
 .board-question {
   text-align: start !important;
   height: 100%;
@@ -195,6 +197,7 @@
         display: block;
         width: 36px;
         height: 36px;
+        object-fit: cover;
       }
     }
     .question-user-nicnName {
@@ -205,6 +208,7 @@
       white-space: nowrap;
     }
   }
+
   .question-createdAt {
     display: flex;
     justify-content: flex-end;

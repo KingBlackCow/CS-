@@ -24,9 +24,9 @@
 
 .profile-img {
   width: 150px;
+  height: 150px;
   object-fit: cover;
   border-radius: 50%;
-  border: 1px solid black;
   overflow: hidden;
 }
 
@@ -101,7 +101,10 @@
 
     .modi-img {
       position: relative;
-      width: 80%;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
       margin: 1em 0;
     }
 
@@ -138,6 +141,11 @@
   margin: 0 0.5em;
 }
 
+.before-profile {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
 /* ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ board.vue ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ */
 .mypage-board-wrap {
   height: 100%;

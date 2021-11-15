@@ -1,6 +1,8 @@
 <template>
   <div class="makeProb-wrap">
-    <div class="makeProb-title">문제만들기</div>
+    <div class="makeProb-title" data-aos="fade-up">
+      <h2><b>문제만들기</b></h2>
+    </div>
     <div class="">
       <form class="makeProb-form" v-on:submit.prevent autocomplete="off">
         <div>

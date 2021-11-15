@@ -1,13 +1,13 @@
 <template lang="">
   <div class="problem-right-wrap">
     <h3 data-aos="fade-up"><b>왼쪽 카테고리에서 문제를 선택해주세요.</b></h3>
-    <h4>
+    <h4 data-aos="fade-left">
       <b>전체 카테고리 : {{ state.categories.length }}</b>
     </h4>
-    <h4>
+    <h4 data-aos="fade-right">
       <b>CSPS의 총 문제 개수 : {{ state.problemNum }}</b>
     </h4>
-    <div @click="makeprob" class="makeprob">문제만들기</div>
+    <q-btn color="brown-5" @click="makeprob" label="문제만들기" />
   </div>
 </template>
 <script>
