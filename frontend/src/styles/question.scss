@@ -60,16 +60,17 @@
 .comment {
   width: 100%;
   margin-top: 1em;
-  padding-left: 4em;
+  padding-left: 30em;
   display: flex;
   flex-direction: row;
   .comment-user-image {
-    width: 5%;
+    width: 10%;
     overflow: hidden;
     .comment-user-image-circle {
       border-radius: 50%;
       width: 36px;
       height: 36px;
+      object-fit: cover;
     }
   }
   .comment-top {
