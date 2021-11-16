@@ -1,3 +1,41 @@
+.board-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 2em 1em 2em 1em;
+}
+.info-content {
+  font-size: 21px;
+  font-weight: bold;
+  span {
+    text-shadow: 4px 4px 0 #a2b29f, 4px -4px 0 #a2b29f, -4px 4px 0 #a2b29f,
+      -4px -4px 0 #a2b29f, 4px 0 0 #a2b29f, -4px 0 0 #a2b29f, 0 4px 0 #a2b29f,
+      0 -4px 0 #a2b29f;
+    color: black;
+  }
+  &.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 2em;
+    margin: 0 auto;
+    border: 2px solid #a2b29f;
+    border-radius: 1em;
+  }
+  &.first {
+    margin: 0.5em 0em;
+    font-size: 48px;
+  }
+  &.second {
+    margin: 1em 0em;
+    font-size: 32px;
+  }
+  &.third {
+    margin: 2em 0em 1em 0em;
+    color: #a2b29f;
+  }
+}
 .board-nav {
   display: flex;
   flex-direction: column;

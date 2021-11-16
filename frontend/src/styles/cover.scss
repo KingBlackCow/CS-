@@ -164,14 +164,82 @@
   display: flex;
   justify-content: flex-end;
   width: 75%;
-  height: 75%;
+  height: 60%;
   // margin: auto;
 }
 
+.info-warn {
+  margin-top: 3em;
+  font-size: 18px;
+  font-weight: bold;
+  color: #a2b29f;
+}
+.info-add {
+  display: flex;
+  justify-content: flex-start;
+  width: 90%;
+  font-size: 48px;
+}
 .info-script {
   font-size: 28px;
-  width: 90%;
+  font-weight: bold;
+  width: 75%;
+  height: 3em;
   margin-top: 1em;
+  color: #a2b29f;
+  // transition: all 0.7s ease-out;
+  animation: 3s 2s ease-out forwards;
+}
+.script-icon {
+  color: red;
+  transition: all 0.7s ease-out;
+  &:hover {
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.125);
+    border-radius: 50%;
+  }
+}
+.add-after {
+  transition: all 0.7s ease-out;
+  color: gray !important;
+}
+.script {
+  border: 4px #e5ebe3 solid;
+  border-radius: 1em;
+  background: transparent;
+  transition: all 0.7s ease-out;
+  background: linear-gradient(
+    270deg,
+    #e5ebe3,
+    #e5ebe3,
+    rgba(34, 34, 34, 0),
+    rgba(34, 34, 34, 0)
+  );
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
 }
 
+.add-script {
+  border: 4px rgba(255, 45, 45, 0.8) solid;
+  border-radius: 1em;
+  background: transparent;
+  transition: all 0.7s ease-out;
+  background: linear-gradient(
+    270deg,
+    rgba(255, 45, 45, 0.8),
+    rgba(255, 100, 100, 0.8),
+    rgba(34, 34, 34, 0),
+    rgba(34, 34, 34, 0)
+  );
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  text-decoration: none;
+}
+.add-script:hover {
+  cursor: pointer;
+  color: #fff;
+  border: 3px solid rgba(223, 190, 106, 0);
+  background-position: 99% 50%;
+}
 /* -----------그림자 --------*/
