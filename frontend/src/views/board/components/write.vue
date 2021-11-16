@@ -83,10 +83,9 @@ export default {
         .then((response) => {
           console.log(response);
           alert("작성이 완료되었습니다.");
-          router.push({ name: "problem" });
-          /* 내가 작성한 글로 보내기 */
-          /* 마이페이지로 보내기 */
-          /* 게시판 소개 페이지로 보내기 */
+          const url = "/home/board/question/" + response.data.id;
+          localStorage.setItem("reload", true);
+          router.push({ path: url });
         })
         .catch((error) => {
           console.log(error);

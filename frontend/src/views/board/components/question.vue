@@ -41,15 +41,24 @@
             :answer="answer"
             :comment="state.question.coComment"
           ></question-answer>
-          <div style="max-width: 900px" class="row justify-center">
-            <q-input
-              v-model="answer"
-              label="댓글달기"
-              @keyup.enter="
-                onSubmit();
-                $event.target.blur();
-              "
-            ></q-input>
+          <div class="question-new-answer">
+            <div class="question-new-answer-inner">
+              <div class="question-new-answer-top">
+                <div>댓글달기</div>
+                <div class="new-answer-btns">
+                  <div class="new-answer-btn" @click="onReset()">초기화</div>
+                  <div class="new-answer-btn" @click="onSubmit()">저장</div>
+                </div>
+              </div>
+              <div class="question-new-answer-bottom">
+                <textarea
+                  class="question-new-answer-bottom-content"
+                  v-model="state.newAnswer"
+                  @keydown.enter="resize()"
+                  @keyup.enter="resize()"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -62,8 +71,8 @@ import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import Viewer from "@toast-ui/editor/dist/toastui-editor-viewer";
 import QuestionAnswer from "./components/answer.vue";
 
-import { computed, reactive, onUpdated } from "vue";
-import { useRoute } from "vue-router";
+import { computed, reactive, onUpdated, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 
 export default {
@@ -77,47 +86,41 @@ export default {
     };
   },
   methods: {
-    onSubmit() {
-      const payload = {
-        content: this.answer,
-        userId: localStorage.getItem("userId"),
-        parentId: 0,
-        boardId: this.$route.params.id,
-      };
-      this.$store
-        .dispatch("root/requestWriteComment", payload)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error.response.data);
-        });
-      this.$router.go();
-    },
-    deleteBoard() {
-      //console.log(this.$route.params.id);
-      this.$store
-        .dispatch("root/requestDelete", this.$route.params.id)
-        .then((response) => {
-          if (response.data == "success") {
-            alert("삭제되었습니다.");
-            this.$router.push({ name: "problem" });
-          }
-        })
-        .catch((error) => {
-          console.log(error.response.data);
-        });
+    resize() {
+      let object = document.querySelector(
+        ".question-new-answer-bottom-content"
+      );
+      console.log("resize", object);
+      object.style.height = 12 + object.scrollHeight + "px";
     },
   },
   setup() {
     const route = useRoute();
     const store = useStore();
+    const router = useRouter();
 
     const state = reactive({
+      newAnswer: "",
       error: "",
       question: null,
       viewer: null,
       user: computed(() => JSON.parse(localStorage.getItem("userInfo"))),
+    });
+
+    if (localStorage.getItem("reload")) {
+      localStorage.removeItem("reload");
+      router.go();
+    }
+
+    onMounted(() => {
+      document
+        .getElementById(localStorage.getItem("menu"))
+        .classList.remove("click-menu");
+      localStorage.removeItem("menu");
+      localStorage.setItem("menu", "menuBtn3");
+      document
+        .getElementById(localStorage.getItem("menu"))
+        .classList.add("click-menu");
     });
 
     const getQuestion = () => {
@@ -146,8 +149,53 @@ export default {
       });
     });
 
+    const onSubmit = () => {
+      console.log(state.newAnswer);
+      store
+        .dispatch("root/requestWriteComment", {
+          content: state.newAnswer,
+          userId: localStorage.getItem("userId"),
+          parentId: 0,
+          boardId: route.params.id,
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+      router.go();
+    };
+
+    const onReset = () => {
+      state.newAnswer = "";
+      let object = document.querySelector(
+        ".question-new-answer-bottom-content"
+      );
+      object.style.height = "2em";
+    };
+
+    const deleteBoard = () => {
+      store
+        .dispatch("root/requestDelete", route.params.id)
+        .then((response) => {
+          if (response.data == "success") {
+            alert("삭제되었습니다.");
+            localStorage.setItem("reload", true);
+            router.push({ name: "board-info" });
+          }
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+    };
+
     return {
       state,
+      onMounted,
+      onSubmit,
+      onReset,
+      deleteBoard,
     };
   },
 };

@@ -271,23 +271,24 @@ export default {
 
     const emailCheck = () => {
       showLoading();
+      console.log("emailcheck", state.form.email);
       store
-        .dispatch("root/requestUserSendEmail", {
-          email: state.form.email,
-        })
+        .dispatch("root/requestUserCheckEmail", state.form.email)
         .then(
           (response) => {
-            console.log(response.data);
-            emailError("이미 가입된 이메일입니다.");
+            console.log(response);
+            state.email.email = state.form.email;
+            state.email.authNumber = response.data.message;
+            state.email.dialog = true;
+            hideLoading();
           },
           (error) => {
             console.log(error);
             if (error.response.status == "404") {
-              state.email.email = state.form.email;
-              state.email.authNumber = error.response.data;
-              hideLoading();
-              state.email.dialog = true;
+              emailError("이미 가입된 이메일입니다.");
+              state.form.email = null;
             }
+            hideLoading();
           }
         )
         .catch((error) => {
@@ -295,7 +296,7 @@ export default {
         });
     };
     const emailSuccess = () => {
-      state.email = false;
+      state.email.dialog = false;
       state.form.email_success = true;
     };
 
@@ -312,7 +313,7 @@ export default {
                 name: state.form.name,
                 nickName: state.form.nickName,
                 pass: state.form.pass,
-                email: state.form.email,
+                email: state.email.email,
               })
               .then(
                 (response) => {
@@ -321,7 +322,7 @@ export default {
                 },
                 (error) => {
                   console.log(error.response.data);
-                  emailError(error.response.data);
+                  emailError(error.response.data.message);
                 }
               )
               .catch((error) => {
@@ -343,8 +344,8 @@ export default {
       state.form.email = null;
       state.form.email_check = false;
       state.form.email_success = false;
-      state.email.email = null;
-      state.email.authNumber = null;
+      state.email.email = "";
+      state.email.authNumber = "";
     };
 
     /*ㅡㅡㅡㅡㅡ 다이얼로그 ㅡㅡㅡㅡㅡ*/
@@ -394,7 +395,7 @@ export default {
       quasar
         .dialog({
           title: "이메일 중복",
-          message: data.message,
+          message: data,
         })
         .onOk(() => {
           console.log("OK");

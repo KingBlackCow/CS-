@@ -10,9 +10,9 @@
     <div class="info-mini-wrap">
       <div class="left-wrap">
         <div class="open-left-wrap">
-          <div class="information-info-action-btn" @click="addInfoAction">
+          <!-- <div class="information-info-action-btn" @click="addInfoAction">
             <q-icon></q-icon>
-          </div>
+          </div> -->
           <div class="information-board-nav">
             <div class="information-board-btn">
               <div class="information-btn-information-board-info">
@@ -172,6 +172,15 @@ import { reactive } from "vue";
 export default {
   name: "info-board-main",
   setup() {
+    document
+      .getElementById(localStorage.getItem("menu"))
+      .classList.remove("click-menu");
+    localStorage.removeItem("menu");
+    localStorage.setItem("menu", "menuBtn1");
+    document
+      .getElementById(localStorage.getItem("menu"))
+      .classList.add("click-menu");
+
     const state = reactive({
       script: "? 버튼을 눌러 기능에 대한 설명을 볼 수 있습니다.",
       add: true,
@@ -212,9 +221,13 @@ export default {
 };
 </script>
 <style scope lang="scss">
+.information-board-nav {
+  height: 100%;
+  overflow: auto;
+}
+
 .information-board-btn {
   width: 100%;
-  height: 15%;
   font-size: 21px;
 
   .information-btn-information-board-info {
@@ -233,14 +246,12 @@ export default {
 }
 .information-board-search {
   width: 100%;
-  height: 5%;
   margin-bottom: 0.125em;
   font-size: 12px;
 }
 
 .information-board-title-list {
   width: 100%;
-  height: 75%;
 }
 .information-board-title-list-item {
   width: 100%;

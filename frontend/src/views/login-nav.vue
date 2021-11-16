@@ -4,7 +4,7 @@
       unelevated
       flat
       id="menuBtn1"
-      class="menu-btn menus click-menu"
+      class="menu-btn menus"
       @click="mvLoginInfo"
       >소개</q-btn
     >
@@ -60,20 +60,33 @@ export default {
     });
 
     const mvLoginInfo = () => {
-      removeColor();
-      addColor("menuBtn1");
-      router.push({ name: "information" });
+      document
+        .getElementById(localStorage.getItem("menu"))
+        .classList.remove("click-menu");
+      localStorage.removeItem("menu");
+      localStorage.setItem("menu", "menuBtn1");
+      document
+        .getElementById(localStorage.getItem("menu"))
+        .classList.add("click-menu");
+
+      router.push({ name: "info-information" });
     };
 
     const mvProblem = () => {
-      removeColor();
-      addColor("menuBtn2");
+      document
+        .getElementById(localStorage.getItem("menu"))
+        .classList.remove("click-menu");
+      localStorage.removeItem("menu");
+      localStorage.setItem("menu", "menuBtn2");
+      document
+        .getElementById(localStorage.getItem("menu"))
+        .classList.add("click-menu");
       store
         .dispatch("root/requsetCategoryList")
         .then(
           (response) => {
             console.log(response);
-            router.push({ name: "problem" });
+            router.push({ name: "problem-info" });
           },
           (error) => {
             console.log(error);
@@ -85,13 +98,25 @@ export default {
     };
 
     const mvBoard = () => {
-      removeColor();
-      addColor("menuBtn3");
+      document
+        .getElementById(localStorage.getItem("menu"))
+        .classList.remove("click-menu");
+      localStorage.removeItem("menu");
+      localStorage.setItem("menu", "menuBtn3");
+      document
+        .getElementById(localStorage.getItem("menu"))
+        .classList.add("click-menu");
       router.push({ name: "board-info" });
     };
     const mvMypage = () => {
-      removeColor();
-      addColor("menuBtn4");
+      document
+        .getElementById(localStorage.getItem("menu"))
+        .classList.remove("click-menu");
+      localStorage.removeItem("menu");
+      localStorage.setItem("menu", "menuBtn4");
+      document
+        .getElementById(localStorage.getItem("menu"))
+        .classList.add("click-menu");
       store
         .dispatch("root/requsetMyChart")
         .then(
@@ -124,19 +149,11 @@ export default {
       let flag = confirm("로그아웃하시겠습니까?");
       if (flag) {
         localStorage.removeItem("token");
+        localStorage.removeItem("userInfo");
+        localStorage.removeItem("menu");
         router.push("/");
         emit("logout");
       }
-    };
-    const removeColor = () => {
-      const menus = document.getElementsByClassName("menus");
-      for (var i = 0; i < menus.length; i++) {
-        menus[i].classList.remove("click-menu");
-      }
-    };
-    const addColor = (id) => {
-      const btn = document.getElementById(id);
-      btn.classList.add("click-menu");
     };
     return {
       state,

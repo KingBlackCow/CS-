@@ -131,7 +131,7 @@ export default {
           done(true);
         }
         done();
-      }, 2000);
+      }, 500);
     };
     return {
       scrollTargetRef,

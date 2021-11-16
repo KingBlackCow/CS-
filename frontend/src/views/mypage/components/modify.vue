@@ -20,20 +20,33 @@
         class="subbtn"
         type="submit"
         @click="modify"
-        color="brown-5"
+        style="background: #696969; color: #ffffff"
         label="수정하기"
       />
     </div>
   </div>
 </template>
 <script>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
 export default {
   name: "modify",
   setup() {
+    onMounted(() => {
+      document.getElementById("leftBtn1").classList.remove("click-myleft");
+      document.getElementById("leftBtn2").classList.add("click-myleft");
+      document
+        .getElementById(localStorage.getItem("menu"))
+        .classList.remove("click-menu");
+      localStorage.removeItem("menu");
+      localStorage.setItem("menu", "menuBtn4");
+      document
+        .getElementById(localStorage.getItem("menu"))
+        .classList.add("click-menu");
+    });
+
     const router = useRouter();
     const store = useStore();
     const state = reactive({
@@ -93,6 +106,7 @@ export default {
     };
 
     return {
+      onMounted,
       state,
       loadf,
       modify,

@@ -57,12 +57,6 @@ export default {
       router.push({ name: "mypage-board" });
     };
 
-    const mvAlarm = () => {
-      removeBolder();
-      addBolder("leftBtn4");
-      router.push({ name: "mypage-alarm" });
-    };
-
     const removeBolder = () => {
       const myleft = document.getElementsByClassName("myleft");
       for (var i = 0; i < myleft.length; i++) {
@@ -79,7 +73,6 @@ export default {
       mvChart,
       mvModify,
       mvBoard,
-      mvAlarm,
     };
   },
 };

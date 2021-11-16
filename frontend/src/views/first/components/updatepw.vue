@@ -8,9 +8,9 @@
       <div class="left-card-back">
         <div class="left-card">
           <div class="updatepw-card-title">새 비밀번호 설정</div>
-          <div class="updatepw-card-info">
-            영문, 숫자, 특수문자를 포함한<br />
-            8자리 이상 비밀번호로 설정
+          <div class="updatepw-card-left-info">
+            영문, 숫자, 특수문자로<br />
+            8자리 이상 비밀번호 설정
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@
         <div class="right-card-top-right"></div>
       </div>
       <div class="right-card-back">
-        <div class="right-card column">
+        <div class="right-card updatepw-right-card">
           <q-btn
             class="updatepw-card-close-btn self-end"
             v-close-popup
@@ -37,7 +37,7 @@
             icon="close"
           />
           <div class="updatepw-card-right-info">
-            <q-form ref="updatepw_form" @submit="onSubmit" @reset="onReset">
+            <q-form ref="updatepw_form">
               <q-input
                 dense
                 v-model="state.form.pass"
@@ -53,14 +53,16 @@
                 type="password"
                 label="비밀번호 확인 *"
               />
-              <div>
-                <q-btn class="q-ml-sm" flat type="reset" label="초기화" />
-                <q-btn
-                  class="updatepw-card-btn"
-                  outline
-                  type="submit"
-                  label="비밀번호변경"
-                />
+              <div class="update-card-right-info-bottom-btns">
+                <div class="update-card-right-info-bottom-btn" @click="onReset">
+                  초기화
+                </div>
+                <div
+                  class="update-card-right-info-bottom-btn"
+                  @click="onSubmit"
+                >
+                  변경
+                </div>
               </div>
             </q-form>
           </div>
@@ -85,6 +87,7 @@ export default {
   name: "login-updatepw",
   props: {
     email: String,
+    authNumber: String,
   },
   setup(props, { emit }) {
     const updatepw_form = ref(null);
@@ -125,15 +128,17 @@ export default {
     };
     /*ㅡㅡㅡㅡㅡ 버튼 ㅡㅡㅡㅡㅡ*/
     const onSubmit = () => {
+      console.log(props.authNumber, state.form.pass);
       updatepw_form.value.validate().then((success) => {
         if (success) {
           store
             .dispatch("root/requestUserFixPw", {
-              email: props.email,
+              key: props.authNumber,
               pass: state.form.pass,
             })
             .then(
-              () => {
+              (response) => {
+                console.log(response);
                 fixpwSuccess();
               },
               (error) => {
@@ -158,6 +163,7 @@ export default {
           message: "비밀번호가 변경되었습니다!",
         })
         .onOk(() => {
+          onReset();
           emit("mvlogin");
         })
         .onCancel(() => {

@@ -34,7 +34,7 @@
         <div class="right-card-top-right"></div>
       </div>
       <div class="right-card-back">
-        <div class="right-card column">
+        <div class="right-card emailcheck-right-card">
           <q-btn
             class="emailcheck-card-close-btn self-end"
             v-close-popup
@@ -49,16 +49,13 @@
             </div>
             <div class="emailcheck-card-right-info-bottom">
               <q-input dense v-model="state.auth" label="인증번호 *"> </q-input>
-              <div>
-                <q-btn
-                  class="emailcheck-card-btn"
-                  outline
-                  @click="emailAuthentication"
-                  >재요청</q-btn
-                >
-                <q-btn class="primary" outline @click="authentication"
-                  >인증</q-btn
-                >
+              <div class="emailcheck-card-right-info-bottom-btns">
+                <div class="emailcheck-card-btn" @click="emailAuthentication">
+                  재요청
+                </div>
+                <div class="emailcheck-card-btn" @click="authentication">
+                  인증
+                </div>
               </div>
             </div>
           </div>
@@ -141,6 +138,7 @@ export default {
         })
         .onOk(() => {
           emit("emailsuccess");
+          state.auth = "";
         })
         .onCancel(() => {
           console.log("Cancel");

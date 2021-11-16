@@ -23,15 +23,24 @@
               :key="index"
               :comment="comment"
             ></answer-comment>
-            <div style="max-width: 400px" class="row justify-center">
-              <q-input
-                v-model="newAnswer"
-                label="대댓글달기"
-                @keyup.enter="
-                  onSubmit();
-                  $event.target.blur();
-                "
-              ></q-input>
+            <div class="answer-new-comment">
+              <div class="answer-new-comment-inner">
+                <div class="answer-new-comment-top">
+                  <div>댓글달기</div>
+                  <div class="new-comment-btns">
+                    <div class="new-comment-btn" @click="onReset()">초기화</div>
+                    <div class="new-comment-btn" @click="onSubmit()">저장</div>
+                  </div>
+                </div>
+                <div class="answer-new-comment-bottom">
+                  <textarea
+                    class="answer-new-comment-bottom-content"
+                    v-model="state.newAnswer"
+                    @keydown.enter="resize()"
+                    @keyup.enter="resize()"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -44,6 +53,8 @@ import "@/styles/question.scss";
 import AnswerComment from "./components/comment.vue";
 
 import { reactive } from "vue";
+import { useStore } from "vuex";
+import { useRouter, useRoute } from "vue-router";
 export default {
   name: "question-answer",
   components: {
@@ -59,27 +70,18 @@ export default {
     };
   },
   methods: {
-    onSubmit() {
-      //console.log(this.state.answer);
-      const payload = {
-        content: this.newAnswer,
-        userId: localStorage.getItem("userId"),
-        parentId: this.state.answer.id,
-        boardId: this.$route.params.id,
-      };
-      this.$store
-        .dispatch("root/requestWriteComment", payload)
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error.response.data);
-        });
-      this.$router.go();
+    resize() {
+      let object = document.querySelector(".answer-new-comment-bottom-content");
+      console.log("resize", object);
+      object.style.height = 12 + object.scrollHeight + "px";
     },
   },
   setup(props) {
+    const store = useStore();
+    const route = useRoute();
+    const router = useRouter();
     const state = reactive({
+      newAnswer: "",
       answer: null,
       comment: null,
     });
@@ -96,8 +98,33 @@ export default {
     };
     setComment();
 
+    const onSubmit = () => {
+      console.log(state.newAnswer);
+      store
+        .dispatch("root/requestWriteComment", {
+          content: state.newAnswer,
+          userId: localStorage.getItem("userId"),
+          parentId: state.answer.id,
+          boardId: route.params.id,
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error.response.data);
+        });
+      router.go();
+    };
+
+    const onReset = () => {
+      state.newAnswer = "";
+      let object = document.querySelector(".answer-new-comment-bottom-content");
+      object.style.height = "2em";
+    };
     return {
       state,
+      onSubmit,
+      onReset,
     };
   },
 };

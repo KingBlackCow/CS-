@@ -76,13 +76,13 @@ export default {
         make.classList.remove("script");
         make.classList.add("add-script");
         make.addEventListener("click", () => {
-          state.script = "카테고리를 선택하여 문제풀기를 시작할 수 있습니다.";
+          state.script =
+            "직접 문제를 만들 수 있습니다. 문제는 관리자에 의해 승인되거나 거절될 수 있습니다.";
         });
         category.classList.remove("script");
         category.classList.add("add-script");
         category.addEventListener("click", () => {
-          state.script =
-            "직접 문제를 만들 수 있습니다. 문제는 관리자에 의해 승인되거나 거절될 수 있습니다.";
+          state.script = "카테고리를 선택하여 문제풀기를 시작할 수 있습니다.";
         });
       } else {
         state.script = "? 버튼을 눌러 기능에 대한 설명을 볼 수 있습니다.";

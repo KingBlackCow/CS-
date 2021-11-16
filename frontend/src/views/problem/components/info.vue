@@ -7,7 +7,11 @@
     <h4 data-aos="fade-right">
       <b>CSPS의 총 문제 개수 : {{ state.problemNum }}</b>
     </h4>
-    <q-btn color="brown-5" @click="makeprob" label="문제만들기" />
+    <q-btn
+      style="background: #696969; color: #ffffff"
+      @click="makeprob"
+      label="문제만들기"
+    />
   </div>
 </template>
 <script>

@@ -18,8 +18,20 @@
   </div>
 </template>
 <script>
+import { onMounted } from "vue";
+
 export default {
   name: "info-information",
+  setup() {
+    onMounted(() => {
+      const menu = localStorage.getItem("menu");
+      document.getElementById(menu).classList.add("click-menu");
+    });
+
+    return {
+      onMounted,
+    };
+  },
 };
 </script>
 <style lang="scss">

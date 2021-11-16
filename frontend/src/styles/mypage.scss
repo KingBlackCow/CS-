@@ -111,7 +111,7 @@
     }
 
     .upload-btn {
-      background-color: gray;
+      background-color: #8b8b8b;
       color: white;
       width: fit-content;
       padding: 0.5em 1em;
@@ -122,7 +122,7 @@
       &:hover {
         cursor: pointer;
         color: #696969;
-        background-color: white;
+        background-color: #c2c2c2;
         transition: all 0.3s ease-out;
       }
     }

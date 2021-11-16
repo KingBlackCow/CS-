@@ -54,6 +54,11 @@ export async function requestUserFixPw({ state }, payload) {
   const body = payload;
   return await axios.post(url, body);
 }
+export async function requestUserCheckEmail({ state }, payload) {
+  console.log("requestUserCheckEmail", state, payload);
+  const url = `/user/dupl/${payload}`;
+  return await axios.get(url);
+}
 
 // 사용자 정보 변경하기
 export async function requestUserModify({ state }, payload) {

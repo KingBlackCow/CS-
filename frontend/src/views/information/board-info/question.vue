@@ -10,9 +10,6 @@
     <div class="info-mini-wrap">
       <div class="left-wrap">
         <div class="open-left-wrap">
-          <div class="information-info-action-btn" @click="addInfoAction">
-            <q-icon></q-icon>
-          </div>
           <div class="information-board-nav">
             <div class="information-board-btn">
               <div class="information-btn-information-board-info">
@@ -432,9 +429,13 @@ export default {
     }
   }
 }
+.information-board-nav {
+  height: 100%;
+  overflow: auto;
+}
+
 .information-board-btn {
   width: 100%;
-  height: 15%;
   font-size: 21px;
 
   .information-btn-information-board-info {
@@ -453,14 +454,12 @@ export default {
 }
 .information-board-search {
   width: 100%;
-  height: 5%;
   margin-bottom: 0.125em;
   font-size: 12px;
 }
 
 .information-board-title-list {
   width: 100%;
-  height: 75%;
 }
 .information-board-title-list-item {
   width: 100%;

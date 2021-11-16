@@ -62,7 +62,7 @@
         class="subbtn"
         type="submit"
         @click="makeProblem"
-        color="brown-5"
+        style="background: #696969; color: #ffffff"
         label="생성하기"
       />
     </div>

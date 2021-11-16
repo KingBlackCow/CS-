@@ -61,12 +61,18 @@
 .comment {
   width: 100%;
   margin-top: 1em;
-  padding-left: 30em;
+  padding-left: 15em;
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
+
   .comment-user-image {
     width: 10%;
     overflow: hidden;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1%;
+
     .comment-user-image-circle {
       border-radius: 50%;
       width: 36px;
@@ -75,7 +81,7 @@
     }
   }
   .comment-top {
-    width: 95%;
+    width: 85%;
     display: flex;
     flex-direction: column;
     .comment-user {
@@ -112,5 +118,62 @@
         padding: 0.5em 0.5em 0.5em 1em;
       }
     }
+  }
+}
+
+.answer-new-comment {
+  margin-top: 2em;
+  margin-left: 15em;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.answer-new-comment-inner {
+  width: calc(85% - 0.5em);
+  border: 2px solid white;
+  color: black;
+  border-radius: 0.75em;
+  overflow: hidden;
+  margin-bottom: 1em;
+}
+
+.answer-new-comment-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  width: 100%;
+  padding: 0.5em 1em;
+}
+
+.new-comment-btns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  .new-comment-btn {
+    width: fit-content;
+    padding: 0 0.5em;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.answer-new-comment-bottom {
+  margin-top: -1em;
+  padding-top: 1em;
+  width: 100%;
+  overflow: hidden;
+  .answer-new-comment-bottom-content {
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: none;
+    overflow: auto;
+    background: none;
+    line-height: 1.2em;
+    min-height: 1.5em;
   }
 }
