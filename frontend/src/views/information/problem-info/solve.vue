@@ -45,11 +45,15 @@
             >
               <q-btn
                 id="menuBtn1"
-                icon="mic_outline"
-                class="information-speech-to-text"
+                round
+                @click="startSpeechToTxt"
                 color="red"
-                size="40px"
-              ></q-btn>
+                class="speech-to-text"
+              >
+                <q-avatar size="120px">
+                  <img src="https://i.ibb.co/qrtvzG3/mike.jpg" />
+                </q-avatar>
+              </q-btn>
             </div>
 
             <div class="information-solve-timer">0.00</div>
