@@ -76,7 +76,7 @@
   </q-dialog>
 </template>
 <script>
-import "@/styles/bookdialog.scss";
+import "@/styles/logindialog.scss";
 import "@/styles/updatepw.scss";
 import { ref, reactive } from "vue";
 import { useStore } from "vuex";

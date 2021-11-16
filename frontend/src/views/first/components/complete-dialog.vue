@@ -2,9 +2,16 @@
   <q-dialog>
     <q-card>
       <q-card-section>
-        <div>회원가입이 완료되었습니다!</div>
+        <div>🎉회원가입이 완료되었습니다🎉</div>
         <div>CS에 오신것을 환영합니다</div>
-        <q-btn flat style="color: #ff0080" @click="mvLogin">로그인하기</q-btn>
+        <div class="finish-regist">
+          <q-btn
+            rounded
+            style="background: #495057; color: #ffffff"
+            @click="mvLogin"
+            >로그인하기</q-btn
+          >
+        </div>
       </q-card-section>
     </q-card>
   </q-dialog>

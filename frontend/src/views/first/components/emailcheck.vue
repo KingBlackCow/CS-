@@ -74,7 +74,7 @@
   </q-dialog>
 </template>
 <script>
-import "@/styles/bookdialog.scss";
+import "@/styles/logindialog.scss";
 import "@/styles/emailcheck.scss";
 import { reactive } from "vue";
 import { useQuasar } from "quasar";

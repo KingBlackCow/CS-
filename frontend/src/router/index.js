@@ -1,32 +1,37 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
+  // {
+  //   path: "/",
+  //   name: "main-logout",
+  //   component: () => import("../views/main/logout.vue"),
+  //   children: [
+  //     {
+  //       path: "/",
+  //       name: "logout-cover",
+  //       component: () => import("../views/logout-cover/cover.vue"),
+  //     },
+  //     {
+  //       path: "/info",
+  //       name: "logout-info",
+  //       component: () => import("../views/logout-info/info.vue"),
+  //     },
+  //     {
+  //       path: "/login",
+  //       name: "login",
+  //       component: () => import("../views/login/login.vue"),
+  //     },
+  //     {
+  //       path: "/register",
+  //       name: "register",
+  //       component: () => import("../views/register/register.vue"),
+  //     },
+  //   ],
+  // },
   {
     path: "/",
-    name: "main-logout",
-    component: () => import("../views/main/logout.vue"),
-    children: [
-      {
-        path: "/",
-        name: "logout-cover",
-        component: () => import("../views/logout-cover/cover.vue"),
-      },
-      {
-        path: "/info",
-        name: "logout-info",
-        component: () => import("../views/logout-info/info.vue"),
-      },
-      {
-        path: "/login",
-        name: "login",
-        component: () => import("../views/login/login.vue"),
-      },
-      {
-        path: "/register",
-        name: "register",
-        component: () => import("../views/register/register.vue"),
-      },
-    ],
+    name: "first-main",
+    component: () => import("../views/first/main.vue"),
   },
   {
     path: "/home",

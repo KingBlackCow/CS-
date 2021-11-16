@@ -124,7 +124,7 @@ export default {
       let flag = confirm("로그아웃하시겠습니까?");
       if (flag) {
         localStorage.removeItem("token");
-        router.push({ name: "logout-cover" });
+        router.push("/");
         emit("logout");
       }
     };
