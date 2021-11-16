@@ -42,7 +42,7 @@ public class ProblemController {
     public ResponseEntity categoryProblems(@PathVariable("id") Long id, @PathVariable("page") int page) {
         Category category = categoryService.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("관련 카테고리가 없습니다."));
-        List<ProblemResponse> problems = problemService.findByCategory(category, page);
+        List<ProblemResponse> problems = problemService.findByCategory(category, 10).subList(0,page);
         if(problems.isEmpty()){
             throw new IllegalStateException("관련 카테고리에 존재하는 문제가 없습니다.");
         }
