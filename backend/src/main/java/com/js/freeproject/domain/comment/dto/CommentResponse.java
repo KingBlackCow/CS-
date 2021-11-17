@@ -1,12 +1,14 @@
 package com.js.freeproject.domain.comment.dto;
 
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.js.freeproject.domain.comment.domain.Comment;
 import com.js.freeproject.domain.user.domain.User;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -15,6 +17,8 @@ public class CommentResponse {
     private String content;
     private User user;
     private Long parentId;
+    
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
     public static final CommentResponse ofComment(final Comment comment){

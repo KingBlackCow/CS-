@@ -1,19 +1,20 @@
 package com.js.freeproject.domain.file.application;
 
-//import com.js.freeproject.domain.amazonS3.S3Service;
-import com.js.freeproject.domain.amazonS3.S3Service;
-import com.js.freeproject.domain.board.application.BoardService;
-import com.js.freeproject.domain.board.domain.Board;
-import com.js.freeproject.domain.board.domain.BoardRepository;
-import com.js.freeproject.domain.file.domain.BoardFile;
-import com.js.freeproject.domain.file.domain.BoardFileRepository;
-import lombok.RequiredArgsConstructor;
+import java.io.IOException;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.List;
+//import com.js.freeproject.domain.amazonS3.S3Service;
+import com.js.freeproject.domain.amazonS3.S3Service;
+import com.js.freeproject.domain.board.domain.Board;
+import com.js.freeproject.domain.board.domain.BoardRepository;
+import com.js.freeproject.domain.file.domain.BoardFile;
+import com.js.freeproject.domain.file.domain.BoardFileRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

@@ -8,13 +8,11 @@ import javax.mail.MessagingException;
 import javax.mail.SendFailedException;
 import javax.transaction.Transactional;
 
-import com.js.freeproject.domain.amazonS3.S3Service;
-import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.js.freeproject.domain.amazonS3.S3Service;
 import com.js.freeproject.domain.mail.domain.Mail;
 import com.js.freeproject.domain.user.domain.User;
 import com.js.freeproject.domain.user.domain.UserRepository;
@@ -27,7 +25,7 @@ import com.sun.jdi.request.DuplicateRequestException;
 import io.lettuce.core.RedisCommandExecutionException;
 import javassist.NotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor

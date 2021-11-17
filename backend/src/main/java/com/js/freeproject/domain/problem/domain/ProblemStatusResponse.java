@@ -1,10 +1,9 @@
 package com.js.freeproject.domain.problem.domain;
 
-import com.js.freeproject.domain.answer.domain.Answer;
-import lombok.Getter;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import lombok.Getter;
 
 @Getter
 public class ProblemStatusResponse {

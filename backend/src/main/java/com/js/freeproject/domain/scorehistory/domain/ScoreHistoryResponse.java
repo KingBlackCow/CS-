@@ -1,10 +1,8 @@
 package com.js.freeproject.domain.scorehistory.domain;
 
-import lombok.Getter;
-
-import javax.persistence.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+
+import lombok.Getter;
 
 @Getter
 public class ScoreHistoryResponse {

@@ -3,10 +3,17 @@ package com.js.freeproject.domain.board.controller;
 import java.io.IOException;
 import java.util.List;
 
-import com.js.freeproject.domain.amazonS3.S3Service;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.js.freeproject.domain.board.application.BoardService;
 import com.js.freeproject.domain.board.domain.Board;
@@ -16,14 +23,13 @@ import com.js.freeproject.domain.board.dto.BoardResponse;
 import com.js.freeproject.domain.board.dto.BoardSaveResponse;
 import com.js.freeproject.domain.board.dto.BoardUserResponse;
 import com.js.freeproject.domain.exhandler.ErrorResult;
-import com.js.freeproject.domain.file.application.BoardFileService;
 import com.js.freeproject.domain.file.domain.BoardFile;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,7 +39,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class BoardController {
 
     private final BoardService boardService;
-    private final S3Service s3Service;
 
     @ApiOperation(value = "게시판 글 작성")
     @PostMapping

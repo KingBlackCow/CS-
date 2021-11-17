@@ -1,13 +1,15 @@
 package com.js.freeproject.domain.category.application;
 
-import com.js.freeproject.domain.category.domain.Category;
-import com.js.freeproject.domain.category.domain.CategoryRepository;
-import lombok.RequiredArgsConstructor;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
+import com.js.freeproject.domain.category.domain.Category;
+import com.js.freeproject.domain.category.domain.CategoryRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @Transactional(readOnly = true)

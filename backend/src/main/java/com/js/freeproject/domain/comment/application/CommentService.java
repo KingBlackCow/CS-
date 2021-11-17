@@ -1,6 +1,14 @@
 package com.js.freeproject.domain.comment.application;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.js.freeproject.domain.board.domain.Board;
 import com.js.freeproject.domain.board.domain.BoardRepository;
 import com.js.freeproject.domain.comment.domain.Comment;
@@ -9,11 +17,8 @@ import com.js.freeproject.domain.comment.dto.CommentRequest;
 import com.js.freeproject.domain.comment.dto.CommentResponse;
 import com.js.freeproject.domain.user.domain.User;
 import com.js.freeproject.domain.user.domain.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

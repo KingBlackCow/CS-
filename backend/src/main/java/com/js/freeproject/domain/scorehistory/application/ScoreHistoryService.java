@@ -3,12 +3,12 @@ package com.js.freeproject.domain.scorehistory.application;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.js.freeproject.domain.scorehistory.domain.ScoreHistoryResponse;
 import org.springframework.stereotype.Service;
 
 import com.js.freeproject.domain.category.domain.Category;
 import com.js.freeproject.domain.scorehistory.domain.ScoreHistory;
 import com.js.freeproject.domain.scorehistory.domain.ScoreHistoryRepository;
+import com.js.freeproject.domain.scorehistory.domain.ScoreHistoryResponse;
 import com.js.freeproject.domain.user.domain.User;
 
 import lombok.RequiredArgsConstructor;

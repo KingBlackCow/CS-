@@ -3,7 +3,6 @@ package com.js.freeproject.domain.scorehistory.controller;
 import java.util.List;
 import java.util.Map;
 
-import com.js.freeproject.domain.scorehistory.domain.ScoreHistoryResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.js.freeproject.domain.category.domain.Category;
 import com.js.freeproject.domain.model.CommonResponse;
 import com.js.freeproject.domain.scorehistory.application.ScoreHistoryService;
-import com.js.freeproject.domain.scorehistory.domain.ScoreHistory;
+import com.js.freeproject.domain.scorehistory.domain.ScoreHistoryResponse;
 import com.js.freeproject.domain.user.application.UserService;
 import com.js.freeproject.domain.user.domain.User;
 import com.js.freeproject.domain.user.dto.UserResponse;
@@ -27,7 +26,6 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.client.HttpClientErrorException;
 
 @RestController
 @RequiredArgsConstructor

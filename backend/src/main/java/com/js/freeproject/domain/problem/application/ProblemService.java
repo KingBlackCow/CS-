@@ -1,27 +1,34 @@
 package com.js.freeproject.domain.problem.application;
 
-import com.js.freeproject.domain.answer.domain.Answer;
-import com.js.freeproject.domain.category.domain.Category;
-import com.js.freeproject.domain.category.domain.CategoryRepository;
-import com.js.freeproject.domain.problem.domain.ProblemMakeRequest;
-import com.js.freeproject.domain.problem.domain.*;
-import com.js.freeproject.domain.user.domain.User;
-import com.js.freeproject.domain.user.domain.UserRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import static java.util.stream.Collectors.toList;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.js.freeproject.domain.answer.domain.Answer;
+import com.js.freeproject.domain.category.domain.Category;
+import com.js.freeproject.domain.category.domain.CategoryRepository;
+import com.js.freeproject.domain.problem.domain.AnswerResponse;
+import com.js.freeproject.domain.problem.domain.Problem;
+import com.js.freeproject.domain.problem.domain.ProblemMakeRequest;
+import com.js.freeproject.domain.problem.domain.ProblemRepository;
+import com.js.freeproject.domain.problem.domain.ProblemResponse;
+import com.js.freeproject.domain.problem.domain.ProblemStatus;
+import com.js.freeproject.domain.problem.domain.ProblemStatusResponse;
+import com.js.freeproject.domain.user.domain.User;
+import com.js.freeproject.domain.user.domain.UserRepository;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-@Slf4j
 public class ProblemService {
     private final ProblemRepository problemRepository;
     private final UserRepository userRepository;

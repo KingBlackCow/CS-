@@ -1,20 +1,19 @@
 package com.js.freeproject.domain.category.controller;
 
+import static java.util.stream.Collectors.toList;
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.js.freeproject.domain.category.application.CategoryService;
 import com.js.freeproject.domain.category.domain.Category;
+
 import io.swagger.annotations.ApiOperation;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.PostConstruct;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.*;
 
 @RestController
 @CrossOrigin(origins = {"*"}, maxAge = 6000)

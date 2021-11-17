@@ -5,12 +5,12 @@ import static java.util.stream.Collectors.toList;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
-import com.js.freeproject.domain.amazonS3.S3Service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.js.freeproject.domain.amazonS3.S3Service;
 import com.js.freeproject.domain.board.domain.Board;
 import com.js.freeproject.domain.board.domain.BoardRepository;
 import com.js.freeproject.domain.board.dto.BoardListResponse;
@@ -24,7 +24,6 @@ import com.js.freeproject.domain.user.domain.User;
 import com.js.freeproject.domain.user.domain.UserRepository;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor

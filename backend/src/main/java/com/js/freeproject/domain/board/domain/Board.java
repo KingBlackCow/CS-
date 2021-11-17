@@ -2,17 +2,23 @@ package com.js.freeproject.domain.board.domain;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.js.freeproject.domain.boardpicture.domain.BoardPicture;
 import com.js.freeproject.domain.comment.domain.Comment;
-
 import com.js.freeproject.domain.file.domain.BoardFile;
 import com.js.freeproject.domain.user.domain.User;
+
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;

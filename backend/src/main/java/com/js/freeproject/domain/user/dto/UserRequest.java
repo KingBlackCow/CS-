@@ -2,15 +2,14 @@ package com.js.freeproject.domain.user.dto;
 
 
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.js.freeproject.domain.user.domain.User;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.Serializable;
 
 @Getter
 @Setter
